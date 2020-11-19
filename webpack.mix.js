@@ -24,7 +24,8 @@ mix.styles([
     './resources/css/vendors/icofont.css',
     './resources/css/vendors/select2.css',
     './resources/css/vendors/themify.css',
-    './resources/css/vendors/scrollable.css'
+    './resources/css/vendors/scrollable.css',
+    './resources/css/sweetalert2.css'
 ], './public/css/theme.css')
 
 mix.scripts([
@@ -39,6 +40,7 @@ mix.scripts([
 mix.scripts([
     './resources/js/select2/select2.full.min.js',
     './resources/js/select2/select2-custom.js',
-    './resources/js/theme-customizer/customizer.js'
+    './resources/js/theme-customizer/customizer.js',
+    './resources/js/sweetalert.min.js'
 ], './public/js/libs.js')
 

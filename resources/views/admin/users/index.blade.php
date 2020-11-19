@@ -18,6 +18,20 @@
             </div>
         </div>
     </div>
+
+    @if(session()->has('deleted_user'))
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body">
+                    <div class="alert alert-success outline alert-dismissible fade show" role="alert"><i data-feather="check-circle"></i>
+                        <p class="text-dark">{{ session()->get('deleted_user') }}</p>
+                        <button class="close" type="button" data-dismiss="alert" aria-label="Close" data-original-title="" title=""><span aria-hidden="true">×</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <!-- Container-fluid starts-->
     <div class="col-sm-12">
         <div class="card">

@@ -191,7 +191,7 @@
                                 <ul class="sidebar-submenu">
                                     <li><a href="{{ route('users.index') }}">All Users</a></li>
                                     <li><a href="{{ route('users.create') }}">Create New User</a></li>
-                                    <li><a href="javascript:void(0)">Manage User</a></li>
+                                    <li><a href="{{ route('users.manage') }}">Manage User</a></li>
                                 </ul>
                             </li>
                             <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i data-feather="layout"></i><span>Posts</span></a>

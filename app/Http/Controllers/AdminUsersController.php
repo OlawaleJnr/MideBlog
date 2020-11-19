@@ -6,6 +6,7 @@ use App\Avatar;
 use App\Http\Requests\AdminUsersRequest;
 use App\Role;
 use App\User;
+use Illuminate\Support\Facades\Session;
 
 class AdminUsersController extends Controller
 {
@@ -126,7 +127,7 @@ class AdminUsersController extends Controller
 
         $user->update($data);
 
-        // return redirect(route('users.edit'));
+        return redirect(route('users.manage'));
     }
 
     /**
@@ -135,8 +136,22 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        unlink(public_path() . $user->avatar->filename);
+        $user->delete();
+        Session::flash('deleted_user', 'The user with the name '.strtoupper($user->name).' has been Deleted');
+        return redirect(route('users.index'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function manage()
+    {
+        $users = User::all();
+        return view('admin.users.manage', compact('users'));
     }
 }
