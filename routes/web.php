@@ -35,4 +35,5 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/admin/user/manage', 'AdminUsersController@manage')->name('users.manage');
 
     // Admin Post Resource view
+    Route::resource('/admin/posts', 'AdminPostsController');
 });

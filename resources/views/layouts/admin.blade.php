@@ -196,8 +196,8 @@
                             </li>
                             <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i data-feather="layout"></i><span>Posts</span></a>
                                 <ul class="sidebar-submenu">
-                                    <li><a href="box-layout.html">All Posts</a></li>
-                                    <li><a href="layout-rtl.html">Create Post</a></li>
+                                    <li><a href="{{ route('posts.index') }}">All Posts</a></li>
+                                    <li><a href="{{ route('posts.create') }}">Create New Post</a></li>
                                 </ul>
                             </li>
                             <li class="sidebar-main-title">
