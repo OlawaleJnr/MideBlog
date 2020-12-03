@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\LockableTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -9,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
+    use LockableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -56,6 +58,11 @@ class User extends Authenticatable
             return true;
         }
         return false;
+    }
+
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
     }
 }
 

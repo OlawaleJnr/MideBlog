@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAvatarIdToUsers extends Migration
+class AddLockoutTimeToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddAvatarIdToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('avatar_id')->nullable()->after('remember_token');
+            $table->integer('lockout_time')->default(0)->after('email');
         });
     }
 
@@ -26,7 +26,7 @@ class AddAvatarIdToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('avatar_id');
+            $table->dropColumn('lockout_time');
         });
     }
 }

@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-7">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index-2.html"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin') }}"><i data-feather="home"></i></a></li>
                         <li class="breadcrumb-item">Users</li>
                         <li class="breadcrumb-item active">Manage User</li>
                     </ol>

@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-7">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index-2.html"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin') }}"><i data-feather="home"></i></a></li>
                         <li class="breadcrumb-item">Users</li>
                         <li class="breadcrumb-item active">Manage User</li>
                     </ol>
@@ -20,9 +20,9 @@
     </div>
 
     <div class="">
-        <div class="col-xl-12 xl-50 appointment-sec box-col-6">
+        <div class="col-xl-12 col-md-12 xl-100 appointment-sec box-col-6">
             <div class="row">
-                <div class="col-xl-12 appointment">
+                <div class="col-xl-12 col-md-12 appointment">
                     <div class="card">
                         <div class="card-header card-no-border">
                             <div class="header-top">

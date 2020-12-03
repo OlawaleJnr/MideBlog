@@ -1,1 +1,63 @@
 @extends('layouts.admin')
+
+@section('content')
+    <!-- Breadcrumbs -->
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Posts</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('admin') }}"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item">Dashboard</li>
+                        <li class="breadcrumb-item active">Posts</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Container-fluid starts-->
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>All Posts</h5>
+                <span>This Table displays information about all posts posted by registered users</span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-border-vertical">
+                    <thead>
+                        <tr>
+                          <th class="text-center" scope="col">S/N</th>
+                          <th scope="col">Published By</th>
+                          <th scope="col">Category</th>
+                          <th scope="col">Photo</th>
+                          <th scope="col">Title</th>
+                          <th scope="col">Body</th>
+                          <th scope="col">Created At</th>
+                          <th scope="col">Updated At</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if($posts)
+                            @foreach($posts as $post)
+                                <tr>
+                                    <td class="text-center">{{ $post->id }}</td>
+                                    <td>{{ $post->user->name }}</td>
+                                    <td>{{ $post->category_id }}</td>
+                                    <td><img class="img-60" src="{{ $post->photo ? $post->photo->picture : '' }}" alt=""></td>
+                                    <td>{{ $post->title }}</td>
+                                    <td>{{ $post->body}}</td>
+                                    <td>{{ $post->created_at->diffForHumans() }}</td>
+                                    <td>{{ $post->updated_at->diffForHumans() }}</td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+@endsection

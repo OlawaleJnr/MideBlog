@@ -21,12 +21,18 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Unlock Screen
+Route::get('/login/locked', 'Auth\LoginController@locked')->middleware('auth')->name('login.locked');
+
+Route::post('/login/locked', 'Auth\LoginController@unlock')->name('login.unlock');
+
+
 Route::group(['middleware' => ['admin']], function () {
 
     // Admin Route View
     Route::get('/admin', function () {
         return view('layouts.admin');
-    })->name('admin');
+    })->name('admin')->middleware('auth.lock');
 
     // Admin Users Resource view
     Route::resource('/admin/users', 'AdminUsersController');

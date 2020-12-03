@@ -15,6 +15,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{ asset('css/theme.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/vendor/summernote.css') }}" rel="stylesheet">
     <link id="color" rel="stylesheet" href="{{ asset('css/color-1.css') }}" media="screen">
 </head>
 
@@ -194,7 +195,7 @@
                                     <li><a href="{{ route('users.manage') }}">Manage User</a></li>
                                 </ul>
                             </li>
-                            <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i data-feather="layout"></i><span>Posts</span></a>
+                            <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="layout"></i><span>Posts</span></a>
                                 <ul class="sidebar-submenu">
                                     <li><a href="{{ route('posts.index') }}">All Posts</a></li>
                                     <li><a href="{{ route('posts.create') }}">Create New Post</a></li>
@@ -269,10 +270,17 @@
     <!-- Custom js -->
     <script src="{{ asset('js/bundle.js') }}"></script>
     <script src="{{ asset('js/libs.js') }}"></script>
+    <script src="{{ asset('js/vendor/editor/summernote/summernote.js') }}"></script>
     <script src="{{ asset('js/icons/feather-icon/feather.min.js') }}"></script>
     <script src="{{ asset('js/icons/feather-icon/feather-icon.js') }}"></script>
     <script src="{{ asset('js/icons/feather-icon/feather-icon-clipart.js') }}"></script>
 
+    <script>
+        $('.summernote').summernote({
+            height: 600,
+            tabsize: 1
+        });
+    </script>
     <!-- <script src="{{ asset('js/notify/index.js') }}"></script> -->
     <!-- <script src="{{ asset('js/tooltip-init.js') }}"></script> -->
     <!-- <script src="{{ asset('js/form-validation-custom.js') }}"></script> -->
