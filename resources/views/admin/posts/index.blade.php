@@ -46,7 +46,7 @@
                                 <tr>
                                     <td class="text-center">{{ $post->id }}</td>
                                     <td>{{ $post->user->name }}</td>
-                                    <td>{{ $post->category_id }}</td>
+                                    <td>{{ $post->category->name }}</td>
                                     <td><img class="img-60" src="{{ $post->photo ? $post->photo->picture : '' }}" alt=""></td>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->body}}</td>

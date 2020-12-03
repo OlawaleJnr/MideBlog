@@ -45,9 +45,11 @@
                                     <select class="js-example-basic-single col-sm-12 @error('category_id') is-invalid @enderror" name="category_id">
                                         <option value>Select category</option>
                                         <optgroup label="Available Category">
-                                            <option value="1" >PHP</option>
-                                            <option value="2" >Laravel</option>
-                                            <option value="3" >Javascript</option>
+                                            @if($categories)
+                                                @foreach($categories as $category)
+                                                    <option value="{{ $category->id }}" >{{ $category->name }}</option>
+                                                @endforeach
+                                            @endif
                                         </optgroup>
                                     </select>
                                     @error('category_id')
