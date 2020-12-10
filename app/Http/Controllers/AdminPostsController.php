@@ -77,9 +77,10 @@ class AdminPostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        $categories = Category::all();
+        return view('admin.posts.edit', compact('post','categories'));
     }
 
     /**
@@ -91,7 +92,22 @@ class AdminPostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $user = Auth::user();
+
+        if($request->hasFile('photo_id'))
+        {
+            $filename = $request->photo_id->getClientOriginalName();
+            $request->photo_id->storeAs('images', $filename, 'public');
+            $photo = Photo::create(['picture' => $filename]);
+            $photo_id = $photo->id;
+            $data['photo_id'] = $photo_id;
+        }
+
+        $user->posts()->whereId($id)->first()->update($data);
+
+        return redirect(route('posts.index'));
     }
 
     /**
@@ -100,8 +116,23 @@ class AdminPostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        // delete the user-post-picture
+        unlink(public_path() . $post->photo->picture);
+        $post->delete();
+        return redirect(route('posts.index'));
+    }
+
+    /**
+     * Manage the specified post from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function manage()
+    {
+        $posts = Post::all();
+        return view('admin.posts.manage', compact('posts'));
     }
 }

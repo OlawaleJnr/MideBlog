@@ -42,4 +42,10 @@ Route::group(['middleware' => ['admin']], function () {
 
     // Admin Post Resource view
     Route::resource('/admin/posts', 'AdminPostsController');
+
+    // Admin Posts Manage View
+    Route::get('/admin/post/manage', 'AdminPostsController@manage')->name('posts.manage');
+
+    // Admin Categories Resource view
+    Route::resource('/admin/categories', 'AdminCategoriesController');
 });

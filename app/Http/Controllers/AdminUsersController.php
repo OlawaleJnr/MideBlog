@@ -127,7 +127,7 @@ class AdminUsersController extends Controller
 
         $user->update($data);
 
-        return redirect(route('users.manage'));
+        return redirect(route('users.index'));
     }
 
     /**

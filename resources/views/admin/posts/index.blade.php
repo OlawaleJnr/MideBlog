@@ -42,7 +42,7 @@
                     </thead>
                     <tbody>
                         @if($posts)
-                            @foreach($posts as $post)
+                            @forelse($posts as $post)
                                 <tr>
                                     <td class="text-center">{{ $post->id }}</td>
                                     <td>{{ $post->user->name }}</td>
@@ -53,7 +53,11 @@
                                     <td>{{ $post->created_at->diffForHumans() }}</td>
                                     <td>{{ $post->updated_at->diffForHumans() }}</td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="text-center">No Posts Available, <a href="{{ route('users.create') }}">Create one <i class="fa fa-plus-circle"></i></a></td>
+                                </tr>
+                            @endforelse
                         @endif
                     </tbody>
                 </table>

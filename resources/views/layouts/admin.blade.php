@@ -129,7 +129,7 @@
                         <li class="maximize"><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
                         <li class="profile-nav onhover-dropdown p-0 mr-0">
                             <div class="media profile-media">
-                                <img class="b-r-10 img-fluid img-30" src="{{ Auth::user()->avatar->filename }}" alt="">
+                                <img class="b-r-10 img-fluid img-30" src="{{ Auth::user()->avatar ? Auth::user()->avatar->filename : '/storage/images/placeholder.png' }}" alt="">
                                 <div class="media-body">
                                     <span>{{ Auth::user()->name }}</span>
                                     <p class="mb-0 font-roboto">{{ Auth::user()->role->name }} <i class="middle fa fa-angle-down"></i></p>
@@ -192,13 +192,14 @@
                                 <ul class="sidebar-submenu">
                                     <li><a href="{{ route('users.index') }}">All Users</a></li>
                                     <li><a href="{{ route('users.create') }}">Create New User</a></li>
-                                    <li><a href="{{ route('users.manage') }}">Manage User</a></li>
+                                    <li><a href="{{ route('users.manage') }}">Manage Users</a></li>
                                 </ul>
                             </li>
                             <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="layout"></i><span>Posts</span></a>
                                 <ul class="sidebar-submenu">
                                     <li><a href="{{ route('posts.index') }}">All Posts</a></li>
                                     <li><a href="{{ route('posts.create') }}">Create New Post</a></li>
+                                    <li><a href="{{ route('posts.manage') }}">Manage Posts</a></li>
                                 </ul>
                             </li>
                             <li class="sidebar-main-title">
