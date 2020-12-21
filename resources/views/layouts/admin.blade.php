@@ -209,9 +209,9 @@
                                 </div>
                             </li>
                             <li class="sidebar-list">
-                                <label class="badge badge-danger">New</label><a class="sidebar-link sidebar-title" href="#"><i data-feather="box"></i><span>Categories</span></a>
+                                <label class="badge badge-info text-white">Latest</label><a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="box"></i><span>Categories</span></a>
                                 <ul class="sidebar-submenu">
-                                    <li><a href="projects.html">All Categoroies</a></li>
+                                    <li><a href="{{ route('categories.index') }}">All Categoroies</a></li>
                                     <li><a href="projectcreate.html">Create New Categories</a></li>
                                 </ul>
                             </li>
