@@ -12,7 +12,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin') }}"><i data-feather="home"></i></a></li>
                         <li class="breadcrumb-item">Dashboard</li>
-                        <li class="breadcrumb-item active">Comments</li>
+                        <li class="breadcrumb-item active">Display Comments</li>
                     </ol>
                 </div>
             </div>
@@ -23,30 +23,30 @@
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">
-                <h5>All Comments</h5>
+                <h5>Displaying Comments for : {{ $post->title }}</h5>
                 <span>This Table displays information about all comments posted by registered users</span>
             </div>
-            <div class="table-responsive">
-                <table class="table table-border-vertical">
-                    <thead>
-                        <tr>
-                          <th class="text-center" scope="col">S/N</th>
-                          <th scope="col">Author</th>
-                          <th scope="col">Email</th>
-                          <th scope="col">Comment Body</th>
-                          <th colspan="3" scope="col">Action</th>
-                          <th scope="col">Created At</th>
-                          <th scope="col">Updated At</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if($comments)
-                            @forelse($comments as $comment)
+            @if($comments)
+                <div class="table-responsive">
+                    <table class="table table-border-vertical">
+                        <thead>
+                            <tr>
+                            <th class="text-center" scope="col">S/N</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Comment Body</th>
+                            <th colspan="3" scope="col">Action</th>
+                            <th scope="col">Created At</th>
+                            <th scope="col">Updated At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($comments as $comment)
                                 <tr>
                                     <td class="text-center">{{ $comment->id }}</td>
                                     <td>{{ $comment->author }}</td>
                                     <td>{{ $comment->email }}</td>
-                                    <td>{{ $comment->body }}</td>
+                                    <td>{{ Str::limit($comment->body, 40, '...')  }}</td>
                                     <td ><a href="{{ route('blog.post', $comment->post_id) }}" target="_blank">View Post</a></td>
                                     <td>
                                         @if($comment->is_active == 1)
@@ -180,15 +180,13 @@
                                     <td>{{ $comment->created_at->diffForHumans() }}</td>
                                     <td>{{ $comment->updated_at->diffForHumans() }}</td>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="7" class="text-center">No Comments Available</td>
-                                </tr>
-                            @endforelse
-                        @endif
-                    </tbody>
-                </table>
-            </div>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                <p class="text-center">No comments available for this post</p>
+            @endif
         </div>
     </div>
 @endsection

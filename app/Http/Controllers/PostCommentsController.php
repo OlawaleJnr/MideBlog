@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostCommentsController extends Controller
 {
@@ -36,7 +38,16 @@ class PostCommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+        $data = [
+            'post_id' => $request->post_id,
+            'is_active' => 0,
+            'author' => $user->name,
+            'email' => $user->email,
+            'body' => $request->body
+        ];
+        Comment::create($data);
+        return redirect()->back();
     }
 
     /**
@@ -47,7 +58,9 @@ class PostCommentsController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $comments = $post->comments;
+        return view('admin.comments.show', compact('comments','post'));
     }
 
     /**
@@ -79,9 +92,10 @@ class PostCommentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Comment $comment)
     {
-        //
+        $comment->delete();
+        return redirect()->back();
     }
 
      /**

@@ -22,7 +22,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Post Route
-Route::get('/post/{post}', 'AdminPostsController@post')->name('post');
+Route::get('/post/{post}', 'AdminPostsController@post')->name('blog.post');
 
 // Unlock Screen
 Route::get('/login/locked', 'Auth\LoginController@locked')->middleware('auth')->name('login.locked');

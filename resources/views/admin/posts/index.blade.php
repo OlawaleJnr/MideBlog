@@ -36,6 +36,7 @@
                           <th scope="col">Photo</th>
                           <th scope="col">Title</th>
                           <th scope="col">Body</th>
+                          <th colspan="2" scope="col">Action</th>
                           <th scope="col">Created At</th>
                           <th scope="col">Updated At</th>
                         </tr>
@@ -49,7 +50,9 @@
                                     <td>{{ $post->category->name }}</td>
                                     <td><img class="img-60" src="{{ $post->photo ? $post->photo->picture : '' }}" alt=""></td>
                                     <td>{{ $post->title }}</td>
-                                    <td>{{ $post->body}}</td>
+                                    <td>{{ Str::limit($post->body, 30, '...') }}</td>
+                                    <td><a href="{{ route('blog.post', $post->id) }}" target="_blank">View Post</a></td>
+                                    <td><a href="{{ route('comments.show', $post->id) }}" target="_blank">View Comments</a></td>
                                     <td>{{ $post->created_at->diffForHumans() }}</td>
                                     <td>{{ $post->updated_at->diffForHumans() }}</td>
                                 </tr>
