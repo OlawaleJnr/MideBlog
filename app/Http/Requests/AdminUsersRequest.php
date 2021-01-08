@@ -28,7 +28,8 @@ class AdminUsersRequest extends FormRequest
             'email' => 'required|email',
             'role_id' => 'required',
             'is_active' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'avatar_id' => 'required'
         ];
     }
 }

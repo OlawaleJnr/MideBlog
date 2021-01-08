@@ -21,6 +21,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Post Route
+Route::get('/post/{post}', 'AdminPostsController@post')->name('post');
+
 // Unlock Screen
 Route::get('/login/locked', 'Auth\LoginController@locked')->middleware('auth')->name('login.locked');
 
@@ -48,4 +51,19 @@ Route::group(['middleware' => ['admin']], function () {
 
     // Admin Categories Resource view
     Route::resource('/admin/categories', 'AdminCategoriesController');
+
+    // Admin Medias Resource view
+    Route::resource('/admin/media', 'AdminMediasController');
+
+    // Post Comments Resource View
+    Route::resource('/admin/comments', 'PostCommentsController');
+    Route::patch('/admin/comments/approve/{comment}', 'PostCommentsController@approve')->name('comments.approve');
+    Route::patch('/admin/comments/unapprove/{comment}', 'PostCommentsController@unapprove')->name('comments.unapprove');
+
+    // Admin Comment Reply Resource View
+    Route::resource('/admin/comment/replies', 'CommentRepliesController');
 });
+
+
+
+

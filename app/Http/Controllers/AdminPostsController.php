@@ -135,4 +135,15 @@ class AdminPostsController extends Controller
         $posts = Post::all();
         return view('admin.posts.manage', compact('posts'));
     }
+
+    /**
+     * Displaying Post View
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function post(Post $post)
+    {
+        return view('post', compact('post'));
+    }
 }

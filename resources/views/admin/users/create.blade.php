@@ -31,21 +31,47 @@
                         <div class="card-body">
                             <form class="theme-form" method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
                                 @csrf
-                                <div class="form-group mb-3">
+                                <div class="form-group text-center mb-4">
+                                    <label class="col-form-label" for="avatar_id">Profile Picture</label>
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div class="fileinput-new img-thumbnail text-center">
+                                            <img src="{{ asset('storage/images/placeholder.png') }}"  id="myImage"  alt="not found" style="width: 240px; height: 220px;"></div>
+                                        <div class="fileinput-preview fileinput-exists img-thumbnail"></div>
+                                        <div class="m-t-20 text-center">
+                                            <span class="btn btn-primary btn-file">
+                                                <span class="fileinput-new"><i class="icon-cloud-up"></i> Select image</span>
+                                                <span class="fileinput-exists"><i class="icon-reload"></i> Change</span>
+                                                <input type="file" name="avatar_id" value="{{ old('avatar_id') }}">
+                                            </span>
+                                            <a href="#" class="btn btn-warning fileinput-exists"
+                                                data-dismiss="fileinput"><i class="icon-trash"></i> Remove</a>
+                                        </div>
+                                    </div>
+                                    @error('avatar_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group mb-4">
                                     <label class="col-form-label" for="name">Name</label>
-                                    <input class="form-control @error('name') is-invalid @enderror" type="text" name="name" placeholder="">
+                                    <input class="form-control @error('name') is-invalid @enderror" type="text" name="name" placeholder=""  value="{{ old('name') }}">
                                     @error('name')
-                                        <div>{{ $message }}</div>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
-                                <div class="form-group mb-3">
+                                <div class="form-group mb-4">
                                     <label class="col-form-label" for="email">Email</label>
-                                    <input class="form-control @error('email') is-invalid @enderror" type="email" name="email" placeholder="">
+                                    <input class="form-control @error('email') is-invalid @enderror" type="email" name="email" placeholder=""  value="{{ old('email') }}">
                                     @error('email')
-                                        <div>{{ $message }}</div>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
-                                <div class="form-group mb-3">
+                                <div class="form-group mb-4">
                                     <label class="col-form-label d-block" for="role_id">Role</label>
                                     <select class="js-example-basic-single col-sm-12 @error('role_id') is-invalid @enderror" name="role_id">
                                         <option value>Choose Options</option>
@@ -56,10 +82,12 @@
                                         </optgroup>
                                     </select>
                                     @error('role_id')
-                                        <div>{{ $message }}</div>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
-                                <div class="form-group mb-3">
+                                <div class="form-group mb-4">
                                     <label class="col-form-label d-block" for="is_active">Status</label>
                                     <select class="js-example-basic-single col-sm-12  @error('is_active') is-invalid @enderror" name="is_active">
                                         <optgroup label="Status">
@@ -68,20 +96,23 @@
                                         </optgroup>
                                     </select>
                                     @error('is_active')
-                                        <div>{{ $message }}</div>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
-                                <div class="form-group mb-3">
+                                <div class="form-group mb-4">
                                     <label class="col-form-label" for="password">Password</label>
                                     <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" placeholder="">
                                     @error('password')
-                                        <div>{{ $message }}</div>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
-                                <div class="form-group mb-5">
-                                    <label class="col-form-label" for="avatar_id">Avatar</label>
+                                <!-- <div class="form-group mb-5">
                                     <input class="form-control" type="file" name="avatar_id">
-                                </div>
+                                </div> -->
                                 <div class="form-group ">
                                     <button type="submit" class="btn btn-primary">Create User</button>
                                 </div>

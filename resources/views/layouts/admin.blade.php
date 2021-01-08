@@ -15,7 +15,14 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{ asset('css/theme.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/gallery.css') }}" rel="stylesheet">
     <link href="{{ asset('css/vendor/summernote.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/vendor/fancybox/css/jquery.fancybox.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/vendor/fancybox/css/jquery.fancybox-buttons.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/vendor/fancybox/css/jquery.fancybox-thumbs.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/vendor/imagehover/css/imagehover.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/vendor/dropify/css/dropify.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/vendor/jasny-bootstrap/css/jasny-bootstrap.min.css') }}" rel="stylesheet">
     <link id="color" rel="stylesheet" href="{{ asset('css/color-1.css') }}" media="screen">
 </head>
 
@@ -200,6 +207,7 @@
                                     <li><a href="{{ route('posts.index') }}">All Posts</a></li>
                                     <li><a href="{{ route('posts.create') }}">Create New Post</a></li>
                                     <li><a href="{{ route('posts.manage') }}">Manage Posts</a></li>
+                                    <li><a href="{{ route('comments.index') }}">All Comments</a></li>
                                 </ul>
                             </li>
                             <li class="sidebar-main-title">
@@ -217,15 +225,22 @@
                             </li>
                             <li class="sidebar-main-title">
                                 <div>
+                                    <h6>Comment</h6>
+                                    <p>Ready to use</p>
+                                </div>
+                            </li>
+                            <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{{ route('comments.index') }}"><i data-feather="message-circle"></i><span>Comments</span></a></li>
+                            <li class="sidebar-main-title">
+                                <div>
                                     <h6>Miscellaneous</h6>
                                     <p>Ready to use</p>
                                 </div>
                             </li>
                             <li class="sidebar-list">
-                                <label class="badge badge-danger">New</label><a class="sidebar-link sidebar-title" href="#"><i data-feather="box"></i><span>Media</span></a>
+                                <label class="badge badge-danger">New</label><a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="image"></i><span>Media</span></a>
                                 <ul class="sidebar-submenu">
-                                    <li><a href="projects.html">All Media</a></li>
-                                    <li><a href="projectcreate.html">Create New Media</a></li>
+                                    <li><a href="{{ route('media.index') }}">All Media</a></li>
+                                    <li><a href="{{ route('media.create') }}">Upload Media</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -271,10 +286,17 @@
     <!-- Custom js -->
     <script src="{{ asset('js/bundle.js') }}"></script>
     <script src="{{ asset('js/libs.js') }}"></script>
+    <script src="{{ asset('js/gallery.js') }}"></script>
+    <script src="{{ asset('js/vendor/dropify/js/dropify.js') }}"></script>
     <script src="{{ asset('js/vendor/editor/summernote/summernote.js') }}"></script>
     <script src="{{ asset('js/icons/feather-icon/feather.min.js') }}"></script>
     <script src="{{ asset('js/icons/feather-icon/feather-icon.js') }}"></script>
     <script src="{{ asset('js/icons/feather-icon/feather-icon-clipart.js') }}"></script>
+    <script src="{{ asset('js/vendor/fancybox/js/jquery.fancybox.pack.js') }}"></script>
+    <script src="{{ asset('js/vendor/fancybox/js/jquery.fancybox-buttons.js') }}"></script>
+    <script src="{{ asset('js/vendor/fancybox/js/jquery.fancybox-thumbs.js') }}"></script>
+    <script src="{{ asset('js/vendor/fancybox/js/jquery.fancybox-media.js') }}"></script>
+    <script src="{{ asset('js/vendor/jasny-bootstrap/jasny-bootstrap.js') }}"></script>
 
     <script>
         $('.summernote').summernote({
@@ -282,6 +304,7 @@
             tabsize: 1
         });
     </script>
+
     <!-- <script src="{{ asset('js/notify/index.js') }}"></script> -->
     <!-- <script src="{{ asset('js/tooltip-init.js') }}"></script> -->
     <!-- <script src="{{ asset('js/form-validation-custom.js') }}"></script> -->
