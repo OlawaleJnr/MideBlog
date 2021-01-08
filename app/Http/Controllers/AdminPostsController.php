@@ -144,6 +144,7 @@ class AdminPostsController extends Controller
      */
     public function post(Post $post)
     {
-        return view('post', compact('post'));
+        $comments = $post->comments()->whereIsActive(1)->get();
+        return view('post', compact('post', 'comments'));
     }
 }

@@ -43,6 +43,7 @@ class PostCommentsController extends Controller
             'post_id' => $request->post_id,
             'is_active' => 0,
             'author' => $user->name,
+            'photo' => $user->avatar->filename,
             'email' => $user->email,
             'body' => $request->body
         ];
