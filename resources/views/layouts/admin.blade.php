@@ -136,7 +136,7 @@
                         <li class="maximize"><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
                         <li class="profile-nav onhover-dropdown p-0 mr-0">
                             <div class="media profile-media">
-                                <img class="b-r-10 img-fluid img-30" src="{{ Auth::user()->avatar ? Auth::user()->avatar->filename : '/storage/images/placeholder.png' }}" alt="">
+                                <img class="b-r-10 img-fluid img-30" style="height: 36px; width: 36px;"src="{{ Auth::user()->avatar ? Auth::user()->avatar->filename : '/storage/images/placeholder.png' }}" alt="">
                                 <div class="media-body">
                                     <span>{{ Auth::user()->name }}</span>
                                     <p class="mb-0 font-roboto">{{ Auth::user()->role->name }} <i class="middle fa fa-angle-down"></i></p>
