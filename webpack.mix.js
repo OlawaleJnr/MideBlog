@@ -24,7 +24,6 @@ mix.styles([
     './resources/css/vendors/icofont.css',
     './resources/css/vendors/select2.css',
     './resources/css/vendors/themify.css',
-    './resources/css/vendors/scrollable.css',
     './resources/css/sweetalert2.css'
 ], './public/css/theme.css')
 
@@ -32,9 +31,7 @@ mix.scripts([
     './resources/js/config.js',
     './resources/js/script.js',
     './resources/js/sidebar-menu.js',
-    './resources/js/dashboard/default.js',
-    './resources/js/scrollable/perfect-scrollbar.min.js',
-    './resources/js/scrollable/scrollable-custom.js'
+    './resources/js/dashboard/default.js'
 ], './public/js/bundle.js')
 
 mix.scripts([

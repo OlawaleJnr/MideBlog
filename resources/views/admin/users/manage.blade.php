@@ -1,5 +1,12 @@
 @extends('layouts.admin')
 
+@section('css-style')
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ asset('css/theme.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
     <!-- Breadcrumbs -->
     <div class="container-fluid">
@@ -106,4 +113,15 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js-scripts')
+    <!-- Jquery & Bootstrap Js -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <!-- Custom js -->
+    <script src="{{ asset('js/bundle.js') }}"></script>
+    <script src="{{ asset('js/libs.js') }}"></script>
+    <script src="{{ asset('js/icons/feather-icon/feather.min.js') }}"></script>
+    <script src="{{ asset('js/icons/feather-icon/feather-icon.js') }}"></script>
+    <script src="{{ asset('js/icons/feather-icon/feather-icon-clipart.js') }}"></script>
 @endsection

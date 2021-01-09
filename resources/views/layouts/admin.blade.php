@@ -11,8 +11,9 @@
     <meta name="author" content="">
     <title>Admin</title>
 
+    @yield('css-style')
     <!-- Bootstrap Core CSS -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{ asset('css/theme.css') }}" rel="stylesheet">
     <link href="{{ asset('css/gallery.css') }}" rel="stylesheet">
@@ -21,9 +22,9 @@
     <link href="{{ asset('css/vendor/fancybox/css/jquery.fancybox-buttons.css') }}" rel="stylesheet">
     <link href="{{ asset('css/vendor/fancybox/css/jquery.fancybox-thumbs.css') }}" rel="stylesheet">
     <link href="{{ asset('css/vendor/imagehover/css/imagehover.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/vendor/dropify/css/dropify.css') }}" rel="stylesheet">
+    
     <link href="{{ asset('css/vendor/jasny-bootstrap/css/jasny-bootstrap.min.css') }}" rel="stylesheet">
-    <link id="color" rel="stylesheet" href="{{ asset('css/color-1.css') }}" media="screen">
+    <link id="color" rel="stylesheet" href="{{ asset('css/color-1.css') }}" media="screen"> --}}
 </head>
 
 <body>
@@ -281,13 +282,16 @@
         </div>
     </div>
 
-    <!-- Jquery & Bootstrap Js -->
+
+    @yield('js-scripts')
+
+    {{-- <!-- Jquery & Bootstrap Js -->
     <script src="{{ asset('js/app.js') }}"></script>
     <!-- Custom js -->
     <script src="{{ asset('js/bundle.js') }}"></script>
     <script src="{{ asset('js/libs.js') }}"></script>
     <script src="{{ asset('js/gallery.js') }}"></script>
-    <script src="{{ asset('js/vendor/dropify/js/dropify.js') }}"></script>
+
     <script src="{{ asset('js/vendor/editor/summernote/summernote.js') }}"></script>
     <script src="{{ asset('js/icons/feather-icon/feather.min.js') }}"></script>
     <script src="{{ asset('js/icons/feather-icon/feather-icon.js') }}"></script>
@@ -303,26 +307,6 @@
             height: 600,
             tabsize: 1
         });
-    </script>
-
-    <!-- <script src="{{ asset('js/notify/index.js') }}"></script> -->
-    <!-- <script src="{{ asset('js/tooltip-init.js') }}"></script> -->
-    <!-- <script src="{{ asset('js/form-validation-custom.js') }}"></script> -->
-    <!-- <script src="{{ asset('js/select2/select2.full.min.js') }}"></script>
-    <script src="{{ asset('js/select2/select2-custom.js') }}"></script> -->
-    <!-- <script src="{{ asset('js/typeahead/handlebars.js') }}"></script>
-    <script src="{{ asset('js/typeahead/typeahead.bundle.js') }}"></script>
-    <script src="{{ asset('js/typeahead/typeahead.custom.js') }}"></script>
-    <script src="{{ asset('js/typeahead-search/handlebars.js') }}"></script>
-    <script src="{{ asset('js/typeahead-search/typeahead-custom.js') }}"></script> -->
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    </script> --}}
 </body>
-
 </html>
