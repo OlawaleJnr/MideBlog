@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\CommentReply;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentRepliesController extends Controller
 {
@@ -80,5 +82,26 @@ class CommentRepliesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Store the comment replies to the database.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function storeReply(Request $request)
+    {
+        $user = Auth::user();
+        $data = [
+            'comment_id' => $request->comment_id,
+            'is_active' => 0,
+            'author' => $user->name,
+            'photo' => $user->avatar->filename,
+            'email' => $user->email,
+            'body' => $request->body
+        ];
+        CommentReply::create($data);
+        return redirect()->back();
     }
 }

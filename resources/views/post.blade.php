@@ -271,6 +271,64 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                {{-- Nested Comment for replies --}}
+                                                <ul class="children">
+                                                    <!-- Start Single Comment  -->
+                                                    @if(count($comment->comment_replies) > 0)
+                                                        @foreach ($comment->comment_replies as $replies)
+                                                            <li class="comment">
+                                                                <div class="comment-body">
+                                                                    <div class="single-comment">
+                                                                        <div class="comment-img">
+                                                                            <img src="{{ $replies->photo ? $replies->photo : '/storage/images/placeholder.png' }}" style="height: 60px; width: 60px;" alt="Author Images">
+                                                                        </div>
+                                                                        <div class="comment-inner">
+                                                                            <h6 class="commenter">
+                                                                                <a class="hover-flip-item-wrapper" href="#">
+                                                                                    <span class="hover-flip-item">
+                                                                                        <span data-text="{{ $replies->author }}">{{ $replies->author }}</span>
+                                                                                    </span>
+                                                                                </a>
+                                                                            </h6>
+                                                                            <div class="comment-meta">
+                                                                                <div class="time-spent">{{ $replies->created_at->diffForHumans() }}
+                                                                                </div>
+                                                                                <div class="reply-edit">
+                                                                                    <div class="reply">
+                                                                                        <a class="comment-reply-link hover-flip-item-wrapper" href="#">
+                                                                                            <span class="hover-flip-item">
+                                                                                                <span data-text="Reply">Reply</span>
+                                                                                            </span>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="comment-text">
+                                                                                <p class="b2">{{ $replies->body }}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        @endforeach
+                                                    @endif
+                                                    <!-- End Single Comment  -->
+                                                    <form action="{{ route('comment.store.replies') }}" method="post">
+                                                        @csrf
+                                                        <input type="hidden" name="comment_id" value="{{ $comment->id }}">
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label for="body">Leave a Reply</label>
+                                                                <textarea name="body"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="form-submit cerchio">
+                                                                <input type="submit" id="submit" class="axil-button button-rounded" value="Post Comment">
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </ul>
                                             </li>
                                             <!-- End Single Comment  -->
                                         </ul>
