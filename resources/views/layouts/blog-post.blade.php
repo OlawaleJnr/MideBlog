@@ -174,12 +174,12 @@
     <script src="{{ asset('js/vendor/modernizr.min.js') }}"></script>
     <!-- Jquery & Bootstrap Js -->
     <script src="{{ asset('js/app.js') }}"></script>
-
     <script src="{{ asset('js/vendor/slick.min.js') }}"></script>
     <script src="{{ asset('js/vendor/tweenmax.min.js') }}"></script>
     <script src="{{ asset('js/vendor/js.cookie.js') }}"></script>
     <script src="{{ asset('js/vendor/jquery.style.switcher.js') }}"></script>
-
     <script src="{{ asset('js/main.js') }}"></script>
+
+    @yield('js-scripts')
 </body>
 
