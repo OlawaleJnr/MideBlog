@@ -58,7 +58,7 @@
                                     <td><img class="img-60" src="{{ $post->photo ? $post->photo->picture : '' }}" alt=""></td>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ Str::limit($post->body, 30, '...') }}</td>
-                                    <td><a href="{{ route('blog.post', $post->id) }}" target="_blank">View Post</a></td>
+                                    <td><a href="{{ route('blog.post', $post->slug) }}" target="_blank">View Post</a></td>
                                     <td><a href="{{ route('comments.show', $post->id) }}" target="_blank">View Comments</a></td>
                                     <td>{{ $post->created_at->diffForHumans() }}</td>
                                     <td>{{ $post->updated_at->diffForHumans() }}</td>

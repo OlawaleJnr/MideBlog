@@ -68,5 +68,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/comment/reply', 'CommentRepliesController@storeReply')->name('comment.store.replies');
 });
 
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth', 'admin']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
+
 
 

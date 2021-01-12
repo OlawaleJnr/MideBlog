@@ -80,9 +80,7 @@
 
                         <!-- Post Details -->
                         <div>
-                            @php
-                                echo $post->body;
-                            @endphp
+                            {{!! $post->body !!}}
                         </div>
 
                         <div class="tagcloud py-4">
@@ -421,7 +419,7 @@
     <script>
         $(document).ready(function() {
             $(".comment-reply-container .comment-reply-link").click(function() {
-                $(".comment-reply").slideToggle("slow");
+                $(this).parents('.comment-body').next().children('.comment-reply').slideToggle("slow");
             });
         });
     </script>

@@ -142,8 +142,9 @@ class AdminPostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function post(Post $post)
+    public function post($slug)
     {
+        $post = Post::where('slug', $slug)->firstOrFail();
         $comments = $post->comments()->whereIsActive(1)->get();
         return view('post', compact('post', 'comments'));
     }
