@@ -1,5 +1,6 @@
 <?php
 
+use App\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,29 +14,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
+    $posts = Post::all();
+    return view('welcome', compact('posts'));
 });
 
-Auth::routes();
+// User Auth Routes
+Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+// Admin Web Routes
+Route::prefix('/admin')->namespace('Admin')->name('admin.')->group(function() {
+    Route::get('/', 'Auth\LoginController@index')->name('login');
+    Route::post('/', 'Auth\LoginController@login')->name('auth.login');
+    Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+});
+
+
+//User Web Routes
+Route::get('/dashboard', 'HomeController@index')->middleware('verified')->name('home');
 
 // Post Route
 Route::get('/post/{post}', 'AdminPostsController@post')->name('blog.post');
 
-// Unlock Screen
-Route::get('/login/locked', 'Auth\LoginController@locked')->middleware('auth')->name('login.locked');
-
-Route::post('/login/locked', 'Auth\LoginController@unlock')->name('login.unlock');
 
 
-Route::group(['middleware' => ['admin']], function () {
-
+Route::group(['middleware' => ['admin', 'verified']], function () {
     // Admin Route View
-    Route::get('/admin', function () {
-        return view('layouts.admin');
-    })->name('admin')->middleware('auth.lock');
+    Route::get('/admin/dashboard', function () {
+		return view('layouts.admin');
+	})->name('admin.home');
 
     // Admin Users Resource view
     Route::resource('/admin/users', 'AdminUsersController');
@@ -64,13 +73,10 @@ Route::group(['middleware' => ['admin']], function () {
     Route::resource('/admin/comment/replies', 'CommentRepliesController');
 });
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/comment/reply', 'CommentRepliesController@storeReply')->name('comment.store.replies');
 });
 
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth', 'admin']], function () {
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth', 'admin', 'verified']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
-
-
-

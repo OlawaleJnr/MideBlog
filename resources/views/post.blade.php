@@ -67,24 +67,21 @@
                     <!-- End Banner Area -->
 
                     <div class="axil-post-details">
-                        <p class="has-small-font-size">
-                            Winners are recognized for outstanding app design,
-                            innovation, ingenuity, and technical achievement
-                        </p>
                         <!-- Post Image -->
                         <figure class="wp-block-image">
                             <img src="{{ $post->photo->picture }}" style="width:100%; height:310px;" alt="Post Images">
                             <!-- Post Image Caption -->
-                            <figcaption>The Apple Design Award trophy, created by the Apple Design team, is a symbol of achievement and excellence.</figcaption>
+                            <figcaption>powered by cmsify</figcaption>
                         </figure>
 
                         <!-- Post Details -->
                         <div>
-                            {{!! $post->body !!}}
+                            {{-- When you want to render no filtering --}}
+                            {!! $post->body !!}
                         </div>
 
                         <div class="tagcloud py-4">
-                            <a href="#">{{ $post->category->name }}</a>
+                            <a href="javascript:void(0)">{{ $post->category->name }}</a>
                         </div>
 
                         <div class="social-share-block">

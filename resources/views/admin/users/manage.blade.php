@@ -5,6 +5,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{ asset('css/theme.css') }}" rel="stylesheet">
+    {{-- Plugin --}}
+    <link href="{{ asset('vendor/datatables/datatables.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/datatable-extension/datatable-extension.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -44,68 +47,78 @@
                             </div>
                         </div>
                         <div class="card-body pt-0">
-                            <div class="appointment-table table-responsive">
-                                <table class="table table-bordernone">
-                                    <tbody>
-                                        @foreach($users as $user)
+                            <div class="dt-ext appointment-table table-responsive">
+                                @if($users)
+                                    <table class="table stripe" id="user-manage-details">
+                                        <thead>
                                             <tr>
-                                                <td>
-                                                    <img class="img-fluid img-40 rounded-circle mb-3" style="height: 40px;" src="{{ $user->avatar ? $user->avatar->filename : '/storage/images/placeholder.png' }}" alt="Image description" data-original-title="" title="">
-                                                    @if($user->is_active == 0)
-                                                        <div class="status-circle bg-danger"></div>
-                                                    @elseif($user->is_active == 1)
-                                                        <div class="status-circle bg-success"></div>
-                                                    @endif
-                                                </td>
-                                                <td class="img-content-box">
-                                                    <span class="d-block">{{ $user->name }}</span><span class="font-roboto">{{ $user->role->name }}</span>
-                                                </td>
-                                                <td>
-                                                    <a href="{{ route('users.edit',  $user->id) }}" class="button btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
-                                                </td>
-                                                <td class="text-right">
-                                                    <a href="{{ route('users.destroy',  $user->id) }}" role="button" onclick="
-                                                        event.preventDefault();
-                                                        deleteUser();
-                                                        function deleteUser(){
-                                                            swal({
-                                                                title: 'Are you sure?',
-                                                                text: 'Once deleted, you will not be able to recover this user!',
-                                                                icon: 'warning',
-                                                                buttons: {
-                                                                    cancel: {
-                                                                    text: 'Cancel',
-                                                                    value: null,
-                                                                    visible: true,
-                                                                    },
-                                                                    confirm: {
-                                                                    text: 'Yes, Delete it!',
-                                                                    value: 'confirm',
-                                                                    visible: true
-                                                                    },
-                                                                },
-                                                                dangerMode: true,
-                                                            })
-                                                            .then((willDeleteUser) => {
-                                                                if(willDeleteUser){
-                                                                    document.getElementById('delete-user-{{ $user->id }}').submit();
-                                                                    swal({
-                                                                        text: 'This User has been deleted!',
-                                                                        icon: 'success',
-                                                                    });
-                                                                }
-                                                            });
-                                                        }
-                                                    " class="button btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></a>
-                                                </td>
-                                                <form class="d-none" action="{{ route('users.destroy',  $user->id) }}" method="post" id="delete-user-{{ $user->id }}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                </form>
+                                                <th scope="col">S/N</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Actions</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($users as $user)
+                                                <tr>
+                                                    <td>{{ $user->id }}</td>
+                                                    <td class="img-content-box">
+                                                        <div class="col-md-10 col-8">
+                                                            <span class="d-block">{{ $user->name }}</span><span class="font-roboto">{{ $user->role->name }}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ route('users.edit',  $user->id) }}" class=""><i class="fa fa-edit fa-2x"></i></a>
+                                                        &nbsp; &nbsp;
+                                                        <a href="{{ route('users.destroy',  $user->id) }}" onclick="
+                                                            event.preventDefault();
+                                                            deleteUser();
+                                                            function deleteUser(){
+                                                                swal({
+                                                                    title: 'Are you sure?',
+                                                                    text: 'Once deleted, you will not be able to recover this user!',
+                                                                    icon: 'warning',
+                                                                    buttons: {
+                                                                        cancel: {
+                                                                        text: 'Cancel',
+                                                                        value: null,
+                                                                        visible: true,
+                                                                        },
+                                                                        confirm: {
+                                                                        text: 'Yes, Delete it!',
+                                                                        value: 'confirm',
+                                                                        visible: true
+                                                                        },
+                                                                    },
+                                                                    dangerMode: true,
+                                                                })
+                                                                .then((willDeleteUser) => {
+                                                                    if(willDeleteUser){
+                                                                        document.getElementById('delete-user-{{ $user->id }}').submit();
+                                                                        swal({
+                                                                            text: 'This User has been deleted!',
+                                                                            icon: 'success',
+                                                                        });
+                                                                    }
+                                                                });
+                                                            }
+                                                        " class="text-danger"><i class="fa fa-trash-o fa-2x"></i></a>
+                                                    </td>
+                                                    <form class="d-none" action="{{ route('users.destroy',  $user->id) }}" method="post" id="delete-user-{{ $user->id }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th scope="col">S/N</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Actions</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -124,4 +137,31 @@
     <script src="{{ asset('js/icons/feather-icon/feather.min.js') }}"></script>
     <script src="{{ asset('js/icons/feather-icon/feather-icon.js') }}"></script>
     <script src="{{ asset('js/icons/feather-icon/feather-icon-clipart.js') }}"></script>
+    {{-- Plugin Js  --}}
+    <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatable-extension/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatable-extension/jszip.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatable-extension/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatable-extension/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatable-extension/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('vendor/datatable-extension/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatable-extension/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatable-extension/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatable-extension/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatable-extension/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatable-extension/responsive.bootstrap4.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('#user-manage-details').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ]
+            });
+        });
+    </script>
 @endsection

@@ -7,6 +7,8 @@ use App\Http\Requests\AdminUsersRequest;
 use App\Role;
 use App\User;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class AdminUsersController extends Controller
 {

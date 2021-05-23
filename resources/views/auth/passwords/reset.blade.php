@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    <title>Reset Password - Mide Blog</title>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -62,4 +66,15 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/axios.min.js') }}"></script>
+    <script src="{{ asset('js/axios-loader.js') }}"></script>
+    <script src="{{ asset('js/notiflix-2.7.0.min.js') }}"></script>
+    <script>
+        loadProgressBar();
+    </script>
 @endsection

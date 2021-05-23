@@ -14,7 +14,7 @@ class AddAvatarIdToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('avatar_id')->nullable()->after('remember_token');
+            $table->integer('avatar_id')->nullable()->after('is_active');
         });
     }
 
