@@ -479,21 +479,28 @@
                                         <li>
                                             <a class="hover-flip-item-wrapper" href="#">
                                                 <span class="hover-flip-item">
-                                            <span data-text="Contact Us">Contact Us</span>
+												<span data-text="Contact Us">Contact Us</span>
                                                 </span>
                                             </a>
                                         </li>
                                         <li>
                                             <a class="hover-flip-item-wrapper" href="#">
                                                 <span class="hover-flip-item">
-                                            <span data-text="Terms of Use">Terms of Use</span>
+												<span data-text="Terms of Use">Terms of Use</span>
                                                 </span>
                                             </a>
                                         </li>
                                         <li>
                                             <a class="hover-flip-item-wrapper" href="#">
                                                 <span class="hover-flip-item">
-                                            <span data-text="Advertise with Us">Advertise with Us</span>
+												<span data-text="Advertise with Us">Advertise with Us</span>
+                                                </span>
+                                            </a>
+                                        </li>
+										<li>
+                                            <a class="hover-flip-item-wrapper" href="#">
+                                                <span class="hover-flip-item">
+												<span data-text="Mide's Store">Mide's Store</span>
                                                 </span>
                                             </a>
                                         </li>
