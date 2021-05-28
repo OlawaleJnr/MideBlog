@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en"  class="no-js">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="CMSIFY 404 ERROR PAGE">
-    <meta name="author" content="TALABI AYOMIDE">
+    <meta name="author" content="Talabi Ayomide">
     @yield('error-title')
+	<link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Custom CSS -->

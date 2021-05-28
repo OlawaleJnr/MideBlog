@@ -1,82 +1,114 @@
-@extends('layouts.app')
+@extends('layouts.adminlogin')
 
 @section('title')
     <title>Mide's Blog - Administrator Acess</title>
 @endsection
 
 @section('content')
-<div class="form-body without">
-    <div class="website-logo">
-        <a href="/">
-            <div class="logo">
-                <img class="logo-size" src="{{ asset('assets/images/mide-blog-logo/png/logo-black.png') }}" alt="Mide-logo-black">
-            </div>
-        </a>
-    </div>
-    <div class="row">
-        <div class="img-holder">
-            <div class="bg"></div>
-            <div class="info-holder">
-                <img src="{{ asset('assets/images/graphic2.svg') }}" alt="">
-            </div>
-        </div>
-        <div class="form-holder">
-            <div class="form-content">
-                <div class="form-items">
-                    <h3>Admin Login Here</h3>
-                    <p>Mide Blog is a social network forum that provides the accessibility to connect to various users articles...</p>
-                    <div class="page-links">
-                        <a href="/admin/login" class="active">Admin Login</a>
-                        <a href="/register">Register</a>
-                    </div>
-                    <form  id="adminLoginForm" autocomplete="off">
-						@csrf
-						{{-- Email Address --}}
-						<div class="form-group">
-							<input id="email" type="email" class="form-control" name="email" value="" placeholder="E-mail Address" required autofocus>
-                            <span  id="email-field" class="invalid-feedback" role="alert"> </span>
-                        </div>
+	<div class="app-content content ">
+		<div class="content-overlay"></div>
+		<div class="header-navbar-shadow"></div>
+		<div class="content-wrapper">
+			<div class="content-header row">
+			</div>
+			<div class="content-body">
+				<div class="auth-wrapper auth-v1 px-2">
+					<div class="auth-inner py-2">
+						<!-- Login v1 -->
+						<div class="card mb-0">
+							<div class="card-body">
+								<a href="javascript:void(0);" class="brand-logo">
+									<img class="logo-size" src="{{ asset('assets/images/mide-blog-logo/png/logo-black.png') }}" alt="Mide-logo-black">
+								</a>
+								
+								<h4 class="card-title mb-1" style="font-family:PTSans; text-transform: capitalize;">Welcome to Mide's Blog! 👋</h4>
+								<p class="card-text mb-2" style="font-family:Roboto; text-transform: capitalize;">Please sign-in to your account and start the adventure</p>
+								
+								<form class="auth-login-form pt-3" autocomplete="off" id="adminLoginForm" >
+									@csrf
+									{{-- Email Address --}}
+									<div class="form-group">
+										<label for="email" class="form-label" style="font-family:PTSans; text-transform: capitalize;">Email Address</label>
+										<input
+											type="email"
+											class="form-control"
+											id="email"
+											name="email"
+											placeholder="E-mail Address"
+											tabindex="1"
+											required 
+											autofocus
+											style="font-family:Roboto;"
+										/>
+										<span id="email-field" class="invalid-feedback" role="alert"> </span>
+									</div>
 
-						{{-- Password --}}
-						<div class="form-group">
-							<input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
-                            <span  id="password-field" class="invalid-feedback" role="alert"></span>
-                        </div>
+									
+									{{-- Password --}}
+									<div class="form-group">
+										<label for="password" class="form-label" style="font-family:PTSans; text-transform: capitalize;">Password</label>
+										<div class="input-group input-group-merge form-password-toggle">
+											<input												
+												type="password" 
+												name="password"  
+												id="password" 
+												class="form-control form-control-merge"
+												tabindex="2"
+												placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+												required
+												style="font-family:Roboto;"
+											/>
+											<div class="input-group-append">
+												<span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
+											</div>
+										</div>
+										<span id="password-field" class="invalid-feedback" role="alert"></span>
+									</div>
+									
+									<div class="form-group">
+										<div class="custom-control custom-checkbox">
+										  <input class="custom-control-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} tabindex="3" />
+										  <label class="custom-control-label" style="font-family:PTSans;" for="remember">{{ __('Remember Me') }}</label>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<button class="btn btn-primary btn-block" type="submit" tabindex="4">{{ __('Sign in') }}</button>
+									</div>
+								</form>
 
-						<div class="form-group">
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-								<label class="form-check-label" for="remember">
-									{{ __('Remember Me') }}
-								</label>
-							</div>
-                        </div>
+								<p class="text-center mt-2">
+									<span>New on our platform?</span>
+									<a href="page-auth-register-v1.html">
+										<span>Create an account</span>
+									</a>
+								</p>
 
-						<div class="form-group mb-0">
-							<div class="form-button">
-								<button id="adminFormSubmitButton" type="submit" class="ibtn btn-block">{{ __('Login') }}</button>
-							</div>
-
-							@if (Route::has('password.request'))
-								<div class="page-links">
-									<a href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
+								<div class="divider my-2">
+									<div class="divider-text">or</div>
 								</div>
-							@endif
-                        </div>
-                    </form>
-					<div class="page-links">
-						<a href="/">Back to Homepage</a>
+
+								<p class="text-center mt-2">
+									<span>New on our platform?</span>
+									<a href="page-auth-register-v1.html">
+										<span>Create an account</span>
+									</a>
+								</p>
+							</div>
+						</div>
+						<!-- /Login v1 -->
 					</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+				</div>
+			</div>
+		</div>
+	</div>
 @endsection
 
 @section('scripts')
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/vendor/vendors.min.js') }}"></script>
+	<script src="{{ asset('js/app-menu.min.js') }}"></script>
+	<script src="{{ asset('js/app.min.js') }}"></script>
     <script src="{{ asset('js/axios.min.js') }}"></script>
     <script src="{{ asset('js/axios-loader.js') }}"></script>
     <script src="{{ asset('js/notiflix-2.7.0.min.js') }}"></script>
@@ -132,5 +164,12 @@
                 $(validation).html('<strong>'+msg[email][0]+'</strong>');
             }
         }
+    </script>
+	<script>
+		$(window).on('load',  function(){
+			if (feather) {
+			feather.replace({ width: 14, height: 14 });
+			}
+		})
     </script>
 @endsection

@@ -12492,6 +12492,7 @@ Instagram Styles
 @media only screen and (max-width: 767px) {
   .bg_image--4 {
     background-position: 26% 33%;
+	/** height: 100%; **/
   }
 }
 
@@ -12516,7 +12517,7 @@ Instagram Styles
 
 @media only screen and (max-width: 767px) {
   .error-area {
-    height: auto;
+    /** height: auto; **/
     padding: 100px 0;
   }
 }

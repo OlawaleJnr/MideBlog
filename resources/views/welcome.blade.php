@@ -3,7 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Mide's Blog - by TALABI AYOMIDE</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Mide's Blog | Home</title>
+		<meta name="author" content="Talabi Ayomide">
 		<link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
         {{-- css --}}
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -18,6 +21,9 @@
     <body>
         {{-- Main Wrapper --}}
         <div class="main-wrapper">
+			<div class="mouse-cursor cursor-outer"></div>
+			<div class="mouse-cursor cursor-inner"></div>
+		
             {{-- Switch Mode --}}
             <div id="my_switcher" class="my_switcher">
                 <ul>
@@ -235,13 +241,12 @@
 												<li><a href="{{ route('home') }}">Dashboard</a></li>												
 											@elseif(Auth::guard('admin')->check())
 												{{-- Admin Dashboard and Admin Logout Route --}}
-												<li><a href="{{ route('admin.home') }}">Dashboard</a></li
+												<li><a href="{{ route('admin.home') }}">Dashboard</a></li>
 											@else
 												{{-- Login and Register Route --}}
 												<li><a href="{{ route('register') }}">Register</a></li>
 												<li><a href="{{ route('login') }}">Login</a></li>
 											@endif
-                                        </ul>
                                         </ul>
                                         <!-- End Mainmanu Nav -->
                                     </nav>
@@ -317,14 +322,10 @@
                         </div>
                     </div>
                     <ul class="mainmenu">
-                        <li class="menu-item-has-children"><a href="javascript:void(0)">Home</a>
-                            <ul class="axil-submenu">
-                                <li><a href="index.html">Home Default</a></li>
-                            </ul>
-                        </li>
+						<li><a href="{{ url('/') }}">Home</a></li>
                         <li class="menu-item-has-children"><a href="javascript:void(0)">Explore</a>
                             <ul class="axil-submenu">
-                                <li><a href="post-details.html">Accessibility</a></li>
+                                <li><a href="javascript:void(0);">Accessibility</a></li>
                             </ul>
                         </li>
                         <li><a href="javascript:void(0)">Mega Menu</a></li>
