@@ -1,93 +1,81 @@
 @extends('layouts.app')
 
 @section('title')
-<title>Login - Mide Blog</title>
+<title>Mide's Blog | Login</title>
 @endsection
 
 @section('content')
-<div class="form-body without">
-    <div class="website-logo">
-        <a href="/">
-            <div class="logo">
-                <img class="logo-size" src="{{ asset('assets/images/mide-blog-logo/png/logo-black.png') }}" alt="Mide-logo-black">
-            </div>
-        </a>
-    </div>
-    <div class="row">
-        <div class="img-holder">
-            <div class="bg"></div>
-            <div class="info-holder">
-                <img src="{{ asset('assets/images/graphic2.svg') }}" alt="">
-            </div>
-        </div>
-        <div class="form-holder">
-            <div class="form-content">
-                <div class="form-items">
-                    <h3>Login Here</h3>
-                    <p>Mide Blog is a social network forum that provides the accessibility to connect to various users articles...</p>
-                    <div class="page-links">
-                        <a href="/login" class="active">Login</a><a href="/register">Register</a>
-                    </div>
-                    <form  method="POST" action="{{ route('login') }}">
-						@csrf
-						{{-- Email Address --}}
-						<div class="form-group">
-							<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="E-mail Address" required autocomplete="email" autofocus>
-							@error('email')
-								<span class="invalid-feedback" role="alert">
-									<strong>{{ $message }}</strong>
-								</span>
-							@enderror
-                        </div>
-
-						{{-- Password --}}
-						<div class="form-group">
-							<input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password" required autocomplete="current-password">
-							@error('password')
-								<span class="invalid-feedback" role="alert">
-									<strong>{{ $message }}</strong>
-								</span>
-							@enderror
-                        </div>
-
-						<div class="form-group">
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-								<label class="form-check-label" for="remember">
-									{{ __('Remember Me') }}
-								</label>
-							</div>
-                        </div>
-
-						<div class="form-group mb-0">
-							<div class="form-button">
-								<button id="submit" type="submit" class="ibtn">{{ __('Login') }}</button>
-							</div>
-
-							@if (Route::has('password.request'))
-								<div class="page-links">
-									<a href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
+	<div class="main">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-10 offset-lg-1">
+					<div class="ugf-container-wrap">
+						<div class="ugf-container">
+							<div class="ugf-content">
+								<div class="logo">
+									<a href="{{ url('/') }}"><img src="{{ asset('assets/images/mide-blog-logo/png/logo-black.png') }}" alt="Mide-logo-black"></a>
 								</div>
-							@endif
-                        </div>
-
-
-                    </form>
-                    <div class="other-links">
-						<div class="text">Or login with</div>
-						<a href="#"><i class="fab fa-facebook-f"></i>Facebook</a>
-						<a href="#"><i class="fab fa-google"></i>Google</a>
-						<a href="#"><i class="fab fa-linkedin-in"></i>Linkedin</a>
+								<h3 style="font-family:PTSans; letter-spacing:-0.5px;">Welcome back!</h3>
+								<p>Sign into your account</p>
+								<form method="POST" action="{{ route('login') }}" autocomplete="off">
+									@csrf
+									{{-- Email Address --}}
+									<div class="form-group">
+										<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="user@mideblog.com" required autofocus style="font-family:PTSans;">
+										<label for="email" style="font-family:PTSans;">Email Addresss</label>										
+										@error('email')
+											<span class="invalid-feedback" role="alert">
+												<strong>{{ $message }}</strong>
+											</span>
+										@enderror
+									</div>
+									
+									{{-- Password --}}
+									<div class="form-group pass-block">
+										<input id="login-password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" required autocomplete="current-password" style="font-family:PTSans;">
+										<label for="password" style="font-family:PTSans;">Password</label>
+										<div class="pass-toggler-btn">
+											<i id="eye" class="fal fa-eye"></i>
+											<i id="eye-slash" class="fal fa-eye-slash"></i>
+										</div>
+										@error('password')
+											<span class="invalid-feedback" role="alert">
+												<strong>{{ $message }}</strong>
+											</span>
+										@enderror
+									</div>
+								
+									<div class="form-group">
+										<button type="submit" class="btn">Login Account</button>
+									</div>
+								</form>	
+								@if (Route::has('password.request'))
+									<a href="{{ route('password.request') }}" style="font-family:PTSans;" class="forget-pass">{{ __('Forgot Your Password?') }}</a>
+								@endif
+								<div class="alternet-access pt-2">
+									<p style="font-family:PTSans;">Don't have an account? <a href="{{ route('register') }}">Create an account!</a></p>
+								</div>
+								<div class="ugf-block-separator">
+								  <p>Or</p> 
+								</div>
+								<div class="ugf-third-party-login">
+									<a href="javascript:void(0);"><img src="{{ asset('assets/images/auth/google.png') }}" alt=""> Sign up with Google</a>
+									<a href="javascript:void(0);"><img src="{{ asset('assets/images/auth/facebook.png') }}" alt=""> Sign up with Facebook</a>
+								</div>
+								<div class="ugf-block-separator">
+								  <p>Navigate</p> 
+								</div>
+								<div class="ugf-third-party-login">
+									<a href="{{ url('/') }}"><i class="fal fa-home pr-4"></i> Back to Homepage</a>
+								</div>
+							</div>
+							<div class="ugf-bg bg-1"></div>
+						</div>
 					</div>
-					<div class="page-links">
-						<a href="/">Back to Homepage</a>
-					</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+				</div>
+			</div>	
+		</div>
+	</div>
 @endsection
 
 @section('scripts')
@@ -96,6 +84,7 @@
     <script src="{{ asset('js/axios.min.js') }}"></script>
     <script src="{{ asset('js/axios-loader.js') }}"></script>
     <script src="{{ asset('js/notiflix-2.7.0.min.js') }}"></script>
+	<script src="{{ asset('js/auth/custom.js') }}"></script>
     <script>
         loadProgressBar();
     </script>

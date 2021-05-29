@@ -175,7 +175,6 @@ a {
 
 a:hover {
   color: #1d68a7;
-  text-decoration: underline;
 }
 
 a:not([href]):not([class]) {
@@ -2147,9 +2146,9 @@ pre code {
 .form-control:focus {
   color: #495057;
   background-color: #fff;
-  border-color: #a1cbef;
+  border-color: #7367F0;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+  box-shadow: 0 3px 10px 0 rgba(34, 41, 47, 0.1);
 }
 
 .form-control::-moz-placeholder {
@@ -3955,8 +3954,8 @@ input[type=button].btn-block {
 
 .custom-control-input:checked ~ .custom-control-label::before {
   color: #fff;
-  border-color: #3490dc;
-  background-color: #3490dc;
+  border-color: #7367F0;
+  background-color: #7367F0;
 }
 
 .custom-control-input:focus ~ .custom-control-label::before {

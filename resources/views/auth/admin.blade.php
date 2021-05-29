@@ -12,8 +12,8 @@
 			<div class="content-header row">
 			</div>
 			<div class="content-body">
-				<div class="auth-wrapper auth-v1 px-2">
-					<div class="auth-inner py-2">
+				<div class="auth-wrapper auth-v1 px-4">
+					<div class="auth-inner py-4">
 						<!-- Login v1 -->
 						<div class="card mb-0">
 							<div class="card-body">
@@ -22,7 +22,7 @@
 								</a>
 								
 								<h4 class="card-title mb-1" style="font-family:PTSans; text-transform: capitalize;">Welcome to Mide's Blog! 👋</h4>
-								<p class="card-text mb-2" style="font-family:Roboto; text-transform: capitalize;">Please sign-in to your account and start the adventure</p>
+								<p class="card-text mb-2" style="font-family:Roboto;">Please sign in to your account and start the adventure</p>
 								
 								<form class="auth-login-form pt-3" autocomplete="off" id="adminLoginForm" >
 									@csrf
@@ -34,7 +34,7 @@
 											class="form-control"
 											id="email"
 											name="email"
-											placeholder="E-mail Address"
+											placeholder="admin@mideblog.com"
 											tabindex="1"
 											required 
 											autofocus
@@ -73,15 +73,17 @@
 									</div>
 									
 									<div class="form-group">
-										<button class="btn btn-primary btn-block" type="submit" tabindex="4">{{ __('Sign in') }}</button>
+										<button class="btn btn-primary btn-block" style="font-family:Roboto;" type="submit" tabindex="4">{{ __('Sign in') }}</button>
 									</div>
 								</form>
 
 								<p class="text-center mt-2">
-									<span>New on our platform?</span>
-									<a href="page-auth-register-v1.html">
-										<span>Create an account</span>
-									</a>
+									<span>Quick help</span>
+									@if (Route::has('password.request'))
+										<a href="{{ route('password.request') }}" style="font-family:PTSans;">
+											<i data-feather="chevron-right"></i> {{ __('Forgot Your Password?') }}
+										</a>
+									@endif
 								</p>
 
 								<div class="divider my-2">
@@ -89,9 +91,8 @@
 								</div>
 
 								<p class="text-center mt-2">
-									<span>New on our platform?</span>
-									<a href="page-auth-register-v1.html">
-										<span>Create an account</span>
+									<a href="{{ url('/') }}" style="font-family:PTSans;">
+										<i data-feather="chevron-left"></i> {{ __('Back to Homepage') }}
 									</a>
 								</p>
 							</div>
