@@ -59,8 +59,8 @@
 								  <p>Or</p> 
 								</div>
 								<div class="ugf-third-party-login">
-									<a href="javascript:void(0);"><img src="{{ asset('assets/images/auth/google.png') }}" alt=""> Sign up with Google</a>
-									<a href="javascript:void(0);"><img src="{{ asset('assets/images/auth/facebook.png') }}" alt=""> Sign up with Facebook</a>
+									<a href="javascript:void(0);"><img src="{{ asset('assets/images/auth/google.png') }}" alt=""> Sign in with Google</a>
+									<a href="javascript:void(0);"><img src="{{ asset('assets/images/auth/facebook.png') }}" alt=""> Sign in with Facebook</a>
 								</div>
 								<div class="ugf-block-separator">
 								  <p>Navigate</p> 

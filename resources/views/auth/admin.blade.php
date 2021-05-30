@@ -107,9 +107,9 @@
 
 @section('scripts')
     <!-- Scripts -->
-    <script src="{{ asset('js/vendor/vendors.min.js') }}"></script>
-	<script src="{{ asset('js/app-menu.min.js') }}"></script>
-	<script src="{{ asset('js/app.min.js') }}"></script>
+    <script src="{{ asset('js/dashboard/vendors.min.js') }}"></script>
+	<script src="{{ asset('js/dashboard/app-menu.min.js') }}"></script>
+	<script src="{{ asset('js/dashboard/app.min.js') }}"></script>
     <script src="{{ asset('js/axios.min.js') }}"></script>
     <script src="{{ asset('js/axios-loader.js') }}"></script>
     <script src="{{ asset('js/notiflix-2.7.0.min.js') }}"></script>

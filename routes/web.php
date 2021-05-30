@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $posts = Post::all();
-    return view('welcome', compact('posts'));
+    return view('index', compact('posts'));
 });
 
 // User Auth Routes
@@ -33,7 +33,11 @@ Route::prefix('/admin')->namespace('Admin')->name('admin.')->group(function() {
 
 
 //User Web Routes
-Route::get('/dashboard', 'HomeController@index')->middleware('verified')->name('home');
+Route::group(['prefix' => '/user', 'middleware' => 'verified'], function() {
+    Route::get('/dashboard', 'HomeController@index')->name('home');
+	Route::get('/account-settings', 'UserAccountsController@index')->name('user.account.settings');
+});
+
 
 // Post Route
 Route::get('/post/{post}', 'AdminPostsController@post')->name('blog.post');

@@ -10,11 +10,11 @@
 		@yield('title')
 		<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
 		<!-- Styles -->
-		<link href="{{ asset('css/vendor/vendors.min.css') }}" rel="stylesheet" />
+		<link href="{{ asset('css/dashboard/vendors.min.css') }}" rel="stylesheet" />
 		<link href="{{ asset('css/app.css') }}" rel="stylesheet" />
-		<link href="{{ asset('css/bootstrap-extended.min.css') }}" rel="stylesheet">
-		<link href="{{ asset('css/components.min.css') }}" rel="stylesheet" />
-		<link href="{{ asset('css/page-auth.min.css') }}" rel="stylesheet">
+		<link href="{{ asset('css/dashboard/bootstrap-extended.min.css') }}" rel="stylesheet">
+		<link href="{{ asset('css/dashboard/components.min.css') }}" rel="stylesheet" />
+		<link href="{{ asset('css/auth/page-auth.min.css') }}" rel="stylesheet">
 		<link href="{{ asset('css/axios-loader.css') }}" rel="stylesheet">
 		<link href="{{ asset('css/notiflix-2.7.0.min.css') }}" rel="stylesheet">
 	</head>

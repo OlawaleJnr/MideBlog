@@ -1,11 +1,11 @@
 /** Font **/
 @font-face {
-    src: url(../fonts/PTSans/PTSans.ttf);
+    src: url(../../fonts/PTSans/PTSans.ttf);
     font-family: PTSans;
 }
 
 @font-face {
-    src: url(../fonts/Roboto/Roboto.ttf);
+    src: url(../../fonts/Roboto/Roboto.ttf);
     font-family: Roboto;
 }
 
