@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-<title>Mide's Blog | Register</title>
+<title>Mide's Blog | Login</title>
 @endsection
 
 @section('content')
