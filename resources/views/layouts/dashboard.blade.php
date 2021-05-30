@@ -11,7 +11,6 @@
 		<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
 		<!-- BEGIN: Vendor CSS-->
 		<link href="{{ asset('css/dashboard/vendors.min.css') }}" rel="stylesheet" />
-		@yield('vendor-css')
 		<!-- BEGIN: Theme CSS-->
 		<link href="{{ asset('css/dashboard/bootstrap.min.css') }}" rel="stylesheet" />
 		<link href="{{ asset('css/dashboard/bootstrap-extended.min.css') }}" rel="stylesheet" />
@@ -22,7 +21,6 @@
 		<link href="{{ asset('css/dashboard/semi-dark-layout.min.css') }}" rel="stylesheet" />
 		<!-- BEGIN: Page CSS-->
 		<link href="{{ asset('css/dashboard/vertical-menu.min.css') }}" rel="stylesheet" />
-		@yield('page-css')
 		<!-- BEGIN: Custom CSS-->
 		<link href="{{ asset('css/dashboard/style.css') }}" rel="stylesheet" />
 	</head>
@@ -119,8 +117,8 @@
 					<li class="nav-item dropdown dropdown-user">
 						<a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<div class="user-nav d-sm-flex d-none">
-								<span class="user-name font-weight-bolder ptsans">{{ Auth::guard('web')->user()->name }}</span>
-								<span class="user-status ptsans">Admin</span>
+								<span class="user-name font-weight-bolder">John Doe</span>
+								<span class="user-status">Admin</span>
 							</div>
 							<span class="avatar">
 								<img class="round" src="../../../app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40">
@@ -189,7 +187,7 @@
 									</g>
 								</svg>
 							</span>
-							<h2 class="brand-text ptsans">Mide's Blog</h2>
+							<h2 class="brand-text">Mide's Blog</h2>
 						</a>
 					</li>
 					<li class="nav-item nav-toggle">
@@ -207,18 +205,34 @@
 					<li class=" nav-item">
 						<a class="d-flex align-items-center" href="{{ route('home') }}">
 							<i data-feather="home"></i>
-							<span class="menu-title text-truncate ptsans" data-i18n="Dashboard">Dashboard</span>
+							<span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span>
+							<span class="badge badge-light-warning badge-pill ml-auto mr-1">2</span>
 						</a>
+						<ul class="menu-content">
+							<li>
+								<a class="d-flex align-items-center" href="dashboard-analytics.html">
+									<i data-feather="circle"></i>
+									<span class="menu-item text-truncate" data-i18n="Analytics">Analytics</span>
+								</a>
+							</li>
+							<li class="active">
+								<a class="d-flex align-items-center" href="dashboard-ecommerce.html">
+									<i data-feather="circle"></i>
+									<span class="menu-item text-truncate" data-i18n="eCommerce">eCommerce</span>
+								</a>
+							</li>
+						</ul>
 					</li>
 					<li class=" nav-item">
 						<a class="d-flex align-items-center" href="{{ route('user.account.settings') }}">
 							<i data-feather="settings"></i>
-							<span class="menu-title text-truncate ptsans" data-i18n="{{ route('user.account.settings') }}">Account Settings</span>
+							<span class="menu-title text-truncate" data-i18n="{{ route('user.account.settings') }}">Account Settings</span>
 						</a>
 					</li>
 				</ul>
 			</div>
 		</div>
+		
 		
 		@yield('content')
 		
@@ -230,7 +244,6 @@
 		<script src="{{ asset('js/axios.min.js') }}"></script>
 		<script src="{{ asset('js/axios-loader.js') }}"></script>
 		<script src="{{ asset('js/notiflix-2.7.0.min.js') }}"></script>
-		@yield('scripts')
 		<script>
 			$(window).on('load',  function(){
 				if (feather) {
@@ -238,5 +251,6 @@
 				}
 			});
 		</script>
+		@yield('scripts')
 	</body>
 </html>
