@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Rules\MatchOldPassword;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class UserAccountsController extends Controller
 {
@@ -14,6 +18,84 @@ class UserAccountsController extends Controller
     public function index()
     {
         return view('user.account.index');
+    }
+
+    /**
+     * Update Profile Picture for user access.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadAvatar(Request $request)
+    {
+        $data = $request->all();
+        $rules = [
+            'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ];
+        $validator = Validator::make($data, $rules);
+        if($validator->fails()) {
+            // not acceptable response
+            return response()->json(['error' => $validator->errors()], 406);
+        }else {
+			// Checking if the request has file of picture
+			if ($request->hasFile('picture')) {
+				# code...
+				// Fetch user original image and store in a avatar variable
+				$avatar = time() . '_' . $request->picture->getClientOriginalName();
+
+				// Call deleteOldAvatar Function
+				$this->deleteOldAvatar();
+
+				// Moving the avatar to a public folder inside the storage parent directory
+				$request->picture->storeAs('images', $avatar, 'public');
+
+				// get the currently authenticated user and then update the user avatar
+                User::find(auth('web')->user()->id)->update(['picture' => $avatar]);
+
+				// success response message
+                return response()->json(['success' => 'Profile picture uploaded successfully', 'redirectTo' => route('user.account.settings')], 201);
+			}else {
+				// bad response message
+				return  response()->json(['error' => 'An error occured while processing your upload request and the server is refusing to respond to it'], 403);
+			}
+		}
+    }
+
+	/**
+     * Delete Previously Uploaded Avatar.
+     *
+     * @return \Illuminate\Http\Response
+     */
+	protected function deleteOldAvatar() {
+        // Check if user has uploaded an avatar before
+        if (auth('web')->user()->picture) {
+            # code...
+            Storage::delete('/storage/images/' . auth('web')->user()->picture);
+        }
+    }
+
+    /**
+     * Update Password Field in the account settings channel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePassword(Request $request)
+    {
+        $data = $request->all();
+        $rules = [
+            'current-password' => ['required', new MatchOldPassword],
+            'password' => 'required',
+            'confirm-password' => 'required|same:password',
+        ];
+        $validator = Validator::make($data, $rules);
+        if ($validator->fails()) {
+            // not acceptable response
+            return response()->json(['error' => $validator->errors()], 406);
+        }else {
+			// Update the new password
+			User::find(auth('web')->user()->id)->update(['password' => bcrypt($data['password'])]);
+			// success response message
+            return response()->json(['success' => 'Password Updated Successfully'], 201);
+		}
     }
 
     /**

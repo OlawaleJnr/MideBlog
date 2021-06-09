@@ -5,10 +5,12 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
+	use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id', 'is_active', 'avatar_id'
+        'name', 'email', 'password', 'is_permission', 'is_active', 'picture'
     ];
 
     /**
@@ -37,27 +39,25 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
 
     ];
-
-    // Added Role Relationship to the user
-    public function role()
+	
+	/**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+	protected $dates = [
+		'deleted_at'
+	];
+	
+	// Adding Picture Accessor
+	protected $path = '/storage/images/';
+	
+	public function getPictureAttribute($picture)
     {
-        return $this->belongsTo('App\Role');
+        return $this->path . $picture;
     }
 
-    // Added Avatar relationship to the user
-    public function avatar()
-    {
-        return $this->belongsTo('App\Avatar');
-    }
-
-    // creating is_admin middleware functionality
-    public function isAdmin(){
-        if ($this->role->name == 'Administrator' && $this->is_active == 1) {
-            return true;
-        }
-        return false;
-    }
-
+	// User has many Post
     public function posts()
     {
         return $this->hasMany('App\Post');

@@ -3,11 +3,13 @@
 @section('vendor-css')
 	<link href="{{ asset('css/dashboard/flatpickr.min.css') }}" rel="stylesheet" />
 	<link href="{{ asset('css/dashboard/select2.min.css') }}" rel="stylesheet" />
+	<link href="{{ asset('css/dashboard/toastr.min.css') }}" rel="stylesheet" />
 @endsection
 
 @section('page-css')
 	<link href="{{ asset('css/dashboard/form-pickadate.min.css') }}" rel="stylesheet" />
 	<link href="{{ asset('css/dashboard/form-flat-pickr.min.css') }}" rel="stylesheet" />
+	<link href="{{ asset('css/dashboard/ext-component-toastr.min.css') }}" rel="stylesheet" />
 @endsection
 
 @section('title')
@@ -140,20 +142,23 @@
 										<div class="media">
 											<a href="javascript:void(0);" class="mr-25">
 												<img
-													src="../../../app-assets/images/portrait/small/avatar-s-11.jpg"
+													src="{{ Auth::guard('web')->user()->picture }}"
 													id="account-upload-img"
 													class="rounded mr-50"
-													alt="profile image"
+													alt="avatar"
 													height="80"
 													width="80"
 												/>
 											</a>
 											<!-- upload and reset button -->
 											<div class="media-body mt-75 ml-1">
-												<label for="account-upload" class="btn btn-sm btn-primary mb-75 mr-75">Upload</label>
-												<input type="file" id="account-upload" hidden accept="image/*" />
-												<button class="btn btn-sm btn-outline-secondary mb-75">Reset</button>
-												<p>Allowed JPG, GIF or PNG. Max size of 800kB</p>
+												<form id="uploadUserProfile" action="javascript:void(0)" enctype="multipart/form-data">
+													@csrf
+													<label for="account-upload" class="btn btn-sm btn-primary mb-75 mr-75">Choose</label>
+													<input type="file" name="picture" id="account-upload" hidden accept="image/*" />
+													<button type="submit" id="uploadUserProfileButton"  class="btn btn-sm btn-outline-secondary mb-75">Upload</button>
+													<p>Allowed JPG, GIF or PNG. Max size of 2048kb</p>
+												</form>
 											</div>
 											<!--/ upload and reset button -->
 										</div>
@@ -174,6 +179,7 @@
 															  id="name"
 															  class="form-control"
 															  name="name"
+															  value="{{ Auth::guard('web')->user()->name }}"
 															  placeholder="Mide's Blog"
 															/>
 														</div>
@@ -191,6 +197,7 @@
 															  id="username"
 															  class="form-control"
 															  name="username"
+															  value="{{ Auth::guard('web')->user()->name }}"
 															  placeholder="MideBlog001"
 															/>
 														</div>
@@ -208,6 +215,7 @@
 															  id="email"
 															  class="form-control"
 															  name="email"
+															  value="{{ Auth::guard('web')->user()->email }}"
 															  placeholder="user@mideblog.com"
 															/>
 														</div>
@@ -226,6 +234,7 @@
 															  class="form-control"
 															  name="company"
 															  placeholder="Mide Technologies"
+															  value="{{ Auth::guard('web')->user()->email }}"
 															/>
 														</div>
 													</div>
@@ -259,28 +268,19 @@
 										aria-expanded="false"
 									>
 										<!-- form -->
-										<form class="form form-vertical" autocomplete="off">
+										<form id="updateUserPassword" class="form form-block form-vertical" autocomplete="off">
 											<div class="row">
 												<div class="col-12 col-sm-6">
 													<div class="form-group"> 
-														<label for="password">Old Password</label>
-														<div class="input-group form-password-toggle input-group-merge">
-															<div class="input-group-prepend">
-																<span class="input-group-text"><i data-feather="lock"></i></span>
-															</div>
-															<input
-																type="password"
-																id="name"
-																class="form-control"
-																name="name"
-																placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-															/>
-															<div class="input-group-append">
-																<div class="input-group-text cursor-pointer">
-																	<i data-feather="eye"></i>
-																</div>
-															</div>
-														</div>
+														<label for="password">Current Password</label>
+														<input
+															type="password"
+															id="current-password"
+															class="form-control"
+															name="current-password"
+															placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+														/>
+														<span id="current-password-field" class="invalid-feedback" role="alert"> </span>
 													</div>
 												</div>
 											</div>
@@ -288,49 +288,31 @@
 												<div class="col-12 col-sm-6">
 													<div class="form-group"> 
 														<label for="password">New Password</label>
-														<div class="input-group form-password-toggle input-group-merge">
-															<div class="input-group-prepend">
-																<span class="input-group-text"><i data-feather="lock"></i></span>
-															</div>
-															<input
-																type="password"
-																id="name"
-																class="form-control"
-																name="name"
-																placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-															/>
-															<div class="input-group-append">
-																<div class="input-group-text cursor-pointer">
-																	<i data-feather="eye"></i>
-																</div>
-															</div>
-														</div>
+														<input
+															type="password"
+															id="password"
+															class="form-control"
+															name="password"
+															placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+														/>
+														<span id="password-field" class="invalid-feedback" role="alert"> </span>
 													</div>
 												</div>
 												<div class="col-12 col-sm-6">
 													<div class="form-group"> 
 														<label for="password">Retype New Password</label>
-														<div class="input-group form-password-toggle input-group-merge">
-															<div class="input-group-prepend">
-																<span class="input-group-text"><i data-feather="lock"></i></span>
-															</div>
-															<input
-																type="password"
-																id="name"
-																class="form-control"
-																name="name"
-																placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-															/>
-															<div class="input-group-append">
-																<div class="input-group-text cursor-pointer">
-																	<i data-feather="eye"></i>
-																</div>
-															</div>
-														</div>
+														<input
+															type="password"
+															id="confirm-password"
+															class="form-control"
+															name="confirm-password"
+															placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+														/>
+														<span id="confirm-password-field" class="invalid-feedback" role="alert"> </span>
 													</div>
 												</div>
 												<div class="col-12">
-													<button type="submit" class="btn btn-primary mt-2 mr-1">Save changes</button>
+													<button type="submit" id="updateUserPasswordButton" class="btn btn-primary mt-2 mr-1">Save changes</button>
 													<button type="reset" class="btn btn-outline-secondary mt-2">Reset</button>
 												</div>
 											</div>
@@ -445,5 +427,147 @@
 	<script src="{{ asset('js/dashboard/flatpickr.min.js') }}"></script>
 	<script src="{{ asset('js/dashboard/select2.full.min.js') }}"></script>
 	<script src="{{ asset('js/dashboard/form-select2.min.js') }}"></script>
+	<script src="{{ asset('js/dashboard/toastr.min.js') }}"></script>
 	<script src="{{ asset('js/dashboard/page-account-settings.min.js') }}"></script>
+	<!-- Handle Profile Image Upload -->
+	<script>
+		// Load progress bar
+        loadProgressBar();
+		$(document).on('submit', '#uploadUserProfile', function (event) {
+			loadSpinner('#uploadUserProfileButton');
+			event.preventDefault();
+			let picture = document.getElementById('account-upload').files[0];
+			let data = new FormData();
+			data.append('picture', picture);
+			try {
+				axios.post("{{ route('user.uploadAvatar') }}", data, {
+					headers: {
+						'Content-Type': 'multipart/form-data',
+					}
+				})
+				.then((result) => {
+					toastr.success(
+						'"👋 '+result.data.success+'"',
+						"User Avatar Upload Successful",
+						{ showMethod: "slideDown", hideMethod: "slideUp", timeOut: 5e3, positionClass: "toast-top-right",  progressBar: !0 }
+					);
+					setTimeout(() => {
+						window.location = result.data.redirectTo;
+					}, 5400)
+					removeSpinner('#uploadUserProfileButton', 'Upload');
+				}).catch((err) => {
+					console.log(err)
+					if(err.response.data.error != undefined)
+					{
+						var obj = Object.keys(err.response.data.error);
+						if (jQuery.inArray('picture', obj) == '-1') {
+							console.log("Picture field validated");
+						} else {
+							const error = err.response.data.error['picture'][0];
+							toastr.error(
+								'"👋 '+error+'"',
+								"User Avatar Upload Error",
+								{ showMethod: "slideDown", hideMethod: "slideUp", timeOut: 5e3, positionClass: "toast-top-right",  progressBar: !0 }
+							);
+						}
+					}
+					removeSpinner('#uploadUserProfileButton', 'Upload')
+				});
+			} catch(error) {
+				toastr.error(
+					'"👋 The server cannot meet the requirements of the expected request-header field"',
+					"500 - Server Error",
+					{ showMethod: "slideDown", hideMethod: "slideUp", timeOut: 5e3, positionClass: "toast-top-right",  progressBar: !0 }
+				);
+			}
+		});
+		
+		function loadSpinner(item) {
+            $(item).attr('disabled', true);
+            $(item).html('<div><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> <span class="ml-25 align-middle">Processing...</span></div>');
+        }
+		
+		function removeSpinner(item, message) {
+            $(item).attr('disabled', false);
+            $(item).html(message);
+        }
+	</script>
+	
+	<!-- Handle Password Field Update -->
+	<script>
+		$(document).on('submit', '#updateUserPassword', function (event) {
+			loadSpinner('#updateUserPasswordButton');
+			event.preventDefault();
+			const formSection = $('.form-block');
+			let data = $(this).serialize();
+			try {
+				axios.post("{{ route('user.updatePassword') }}", data)
+				.then((result) => {
+					// Form Block Section
+					formSection.block({
+						message: '<div class="spinner-border text-primary" role="status"></div><br><p class="mt-1">Please Wait...</p>',
+						timeout: 1000,
+						css: {
+							backgroundColor: 'transparent',
+							border: '0'
+						},
+						overlayCSS: {
+							backgroundColor: '#fff',
+							opacity: 0.8
+						}
+					});
+					// Remove Error Message
+					$('#current-password').removeClass('is-invalid');
+					$('#current-password-field').html('');
+					$('#password').removeClass('is-invalid');
+					$('#password-field').html('');
+					$('#confirm-password').removeClass('is-invalid');
+					$('#confirm-password-field').html('');
+					//Toastr Message
+					toastr.success(
+						'"👋 '+result.data.success+'"',
+						"Profile Update Successful",
+						{ showMethod: "slideDown", hideMethod: "slideUp", timeOut: 5e3, positionClass: "toast-top-right",  progressBar: !0 }
+					);
+					// set spinner to initial state
+					removeSpinner('#updateUserPasswordButton', 'Save Changes')
+				}).catch((err) => {
+					console.log(err);
+					printErrorMsg(err.response.data.error)
+					removeSpinner('#updateUserPasswordButton', 'Save Changes')
+				});
+			}catch(error) {
+				
+			}
+		});
+		
+		function printErrorMsg(msg) {
+            if (msg != undefined) {
+                var obj = Object.keys(msg);
+                processError(msg, obj, 'current-password', '#current-password', '#current-password-field');
+                processError(msg, obj, 'password', '#password', '#password-field');
+				processError(msg, obj, 'confirm-password', '#confirm-password', '#confirm-password-field');
+            }
+        }
+		
+		function processError(msg, obj, name_field, input, validation) {
+            if (jQuery.inArray(name_field, obj) == '-1') {
+                $(input).removeClass('is-invalid');
+                $(validation).html('');
+            } else {
+                $(input).addClass('is-invalid');
+                $(validation).html('<strong>'+msg[name_field][0]+'</strong>');
+            }
+        }
+		
+		function loadSpinner(item) {
+            $(item).attr('disabled', true);
+            $(item).html('<div><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> <span class="ml-25 align-middle">Processing...</span></div>');
+        }
+		
+		function removeSpinner(item, message) {
+            $(item).attr('disabled', false);
+            $(item).html(message);
+        }
+	</script>
 @endsection

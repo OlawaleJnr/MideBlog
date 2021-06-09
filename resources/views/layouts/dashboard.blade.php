@@ -25,6 +25,8 @@
 		@yield('page-css')
 		<!-- BEGIN: Custom CSS-->
 		<link href="{{ asset('css/dashboard/style.css') }}" rel="stylesheet" />
+		<link href="{{ asset('css/axios-loader.css') }}" rel="stylesheet">
+		<link href="{{ asset('css/notiflix-2.7.0.min.css') }}" rel="stylesheet">
 	</head>
 	<body class="vertical-layout vertical-menu-modern  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="">
 		<!-- BEGIN: Header-->
@@ -120,10 +122,16 @@
 						<a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<div class="user-nav d-sm-flex d-none">
 								<span class="user-name font-weight-bolder ptsans">{{ Auth::guard('web')->user()->name }}</span>
-								<span class="user-status ptsans">Admin</span>
+								<span class="user-status ptsans">
+									@if(Auth::guard('web')->user()->is_permission == 0) 
+										User
+									@elseif(Auth::guard('web')->user()->is_permission == 1)
+										Publisher
+									@endif
+								</span>
 							</div>
 							<span class="avatar">
-								<img class="round" src="../../../app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40">
+								<img class="round" src="{{ Auth::guard('web')->user()->picture }}" alt="avatar" height="40" width="40">
 								<span class="avatar-status-online"></span>
 							</span>
 						</a>

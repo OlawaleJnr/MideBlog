@@ -73,7 +73,7 @@
 									</div>
 									
 									<div class="form-group">
-										<button class="btn btn-primary btn-block" style="font-family:Roboto;" type="submit" tabindex="4">{{ __('Sign in') }}</button>
+										<button class="btn btn-primary btn-block" id="adminFormSubmitButton" style="font-family:Roboto;" type="submit" tabindex="4">{{ __('Sign in') }}</button>
 									</div>
 								</form>
 
@@ -117,7 +117,7 @@
         // Load progress bar
         loadProgressBar();
         $(document).on('submit', '#adminLoginForm', function (event) {
-            loadSpinner('#adminFormSubmitButton')
+            loadSpinner('#adminFormSubmitButton');
             event.preventDefault();
             let data = $(this).serialize();
             axios.post("{{ route('admin.auth.login') }}", data)
@@ -130,17 +130,17 @@
                     window.location = result.data.redirectTo;
                 }, 5000)
                 console.log(result)
-                removeSpinner('#adminFormSubmitButton', 'Login')
+                removeSpinner('#adminFormSubmitButton', 'Sign in')
             }).catch((err) => {
                 printErrorMsg(err.response.data.error) //err=error from the catch block, response.data.error = error from the validator
                 Notiflix.Report.Failure('Error', '"'+err.response.data.error+'"', 'Ok')
-                removeSpinner('#adminFormSubmitButton', 'Login')
+                removeSpinner('#adminFormSubmitButton', 'Sign in')
             });
         });
 
         function loadSpinner(item) {
             $(item).attr('disabled', true);
-            $(item).html('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
+            $(item).html('<div><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> <span class="ml-25 align-middle">Processing...</span></div>');
         }
 
         function removeSpinner(item, message) {
