@@ -33,9 +33,11 @@ Route::prefix('/admin')->namespace('Admin')->name('admin.')->group(function() {
 
 
 //User Web Routes
-Route::group(['prefix' => '/user', 'middleware' => 'verified'], function() {
+Route::group(['prefix' => '/user', 'middleware' => ['verified', 'auth', 'web']], function() {
     Route::get('/dashboard', 'HomeController@index')->name('home');
 	Route::get('/account-settings', 'UserAccountsController@index')->name('user.account.settings');
+    Route::post('/account-settings/upload-avatar', 'UserAccountsController@uploadAvatar')->name('user.uploadAvatar');
+    Route::post('/account-settings/update-password', 'UserAccountsController@updatePassword')->name('user.updatePassword');
 });
 
 
