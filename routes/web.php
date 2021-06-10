@@ -38,6 +38,7 @@ Route::group(['prefix' => '/user', 'middleware' => ['verified', 'auth', 'web']],
 	Route::get('/account-settings', 'UserAccountsController@index')->name('user.account.settings');
     Route::post('/account-settings/upload-avatar', 'UserAccountsController@uploadAvatar')->name('user.uploadAvatar');
     Route::post('/account-settings/update-password', 'UserAccountsController@updatePassword')->name('user.updatePassword');
+	Route::post('/account-settings/update-information', 'UserAccountsController@updateInformation')->name('user.updateInformation');
 });
 
 

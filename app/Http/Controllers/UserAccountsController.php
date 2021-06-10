@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Rules\MatchOldPassword;
 use App\User;
+use App\Information;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class UserAccountsController extends Controller
 {
@@ -98,6 +100,47 @@ class UserAccountsController extends Controller
 		}
     }
 
+	
+	/**
+     * Update Information Field in the account settings channel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateInformation(Request $request)
+    {
+		// grab the currently authenticated user_id
+		$user = Auth::guard('web')->user()->id;
+		
+		// grab all data from the request
+        $data = $request->all();
+		$data['user_id'] = $user;
+		
+        $rules = [
+            'bio' => 'required',
+            'dob' => 'required',
+            'country' => 'required',
+			'website' => 'required',
+			'mobileNumber' => 'required',
+        ];
+		
+		// validate request body
+        $validator = Validator::make($data, $rules);
+        if ($validator->fails()) {
+            // not acceptable response
+            return response()->json(['error' => $validator->errors()], 406); 
+        }else {
+			$findUser = Information::where('user_id', $user)->first();
+			if($findUser == null){
+				// Add User Information
+				Information::create($data);
+				// success response message
+				return response()->json(['success' => 'User Information Added Successfully'], 201);
+			}else{
+				Information::where('user_id', $data['user_id'])->update($data);
+				return response()->json(['success' => 'User Information Updated Successfully'], 201);
+			}
+		}
+    }
     /**
      * Show the form for creating a new resource.
      *

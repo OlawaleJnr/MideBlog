@@ -328,7 +328,7 @@
 										aria-labelledby="account-pill-info"
 										aria-expanded="false"
 									>
-										<form class="form form-vertical mt-2" autocomplete="off">
+										<form id="updateUserInformation" class="form form-vertical mt-2" autocomplete="off">
 											<div class="row">
 												<div class="col-12">
 													<div class="form-group">
@@ -339,73 +339,67 @@
 															name="bio"
 															rows="4"
 															placeholder="Your Bio data here..."
-														></textarea>
+														>{{ Auth::guard('web')->user()->information->bio }}</textarea>
+														<span id="bio-field" class="invalid-feedback" role="alert"> </span>
 													</div>
 												</div>
 												<div class="col-12 col-sm-6">
 													<div class="form-group">
 														<label for="dob">Birth date</label>
-														<div class="input-group input-group-merge">
-															<div class="input-group-prepend">
-																<span class="input-group-text"><i data-feather="calendar"></i></span>
-															</div>
-															<input
-															  type="text"
-															  id="account-birth-date"
-															  class="form-control flatpickr"
-															  name="dob"
-															  placeholder="YY-MM-DD"
-															/>
-														</div>
+														<input
+															type="text"
+															id="account-birth-date"
+															class="form-control flatpickr"
+															name="dob"
+															placeholder="YY-MM-DD"
+															value="{{ Auth::guard('web')->user()->information->dob }}"
+														/>
+														<span id="dob-field" class="invalid-feedback" role="alert"> </span>
 													</div>
 												</div>
 												<div class="col-12 col-sm-6">
 													<div class="form-group">
 														<label for="country">Country</label>
-														<select class="select2 form-control" id="country">
-															<option>Nigeria</option>
-															<option>USA</option>
-															<option>India</option>
-															<option>Canada</option>
+														<select class="select2 form-control" id="country" name="country">
+															<option value="">Select an option</option>
+															<option value="NIGERIA">Nigeria</option>
+															<option value="USA">USA</option>
+															<option value="INDIA">India</option>
+															<option value="CANADA">Canada</option>
 														</select>
+														<span id="country-field" class="invalid-feedback" role="alert"> </span>
 													</div>
 												</div>
 												<div class="col-12 col-sm-6">
 													<div class="form-group">
 														<label for="website">Personal Website</label>
-														<div class="input-group input-group-merge">
-															<div class="input-group-prepend">
-																<span class="input-group-text"><i data-feather="airplay"></i></span>
-															</div>
-															<input
-															  type="text"
-															  id="website"
-															  class="form-control"
-															  name="website"
-															  placeholder="http://mideblog.herokuapp.com"
-															/>
-														</div>
+														<input
+															type="text"
+															id="website"
+															class="form-control"
+															name="website"
+															placeholder="http://mideblog.herokuapp.com"
+															value="{{ Auth::guard('web')->user()->information->website }}"
+														/>
+														<span id="website-field" class="invalid-feedback" role="alert"> </span>
 													</div>
 												</div>
 												<div class="col-12 col-sm-6">
 													<div class="form-group">
 														<label for="mobileNumber">Mobile Number</label>
-														<div class="input-group input-group-merge">
-															<div class="input-group-prepend">
-																<span class="input-group-text"><i data-feather="phone"></i></span>
-															</div>
-															<input
-															  type="text"
-															  id="mobileNumber"
-															  class="form-control"
-															  name="mobileNumber"
-															  placeholder="(+656) 254 2568"
-															/>
-														</div>
+														<input
+															type="text"
+															id="mobileNumber"
+															class="form-control"
+															name="mobileNumber"
+															placeholder="(+656) 254 2568"
+															value="{{ Auth::guard('web')->user()->information->mobileNumber }}"
+														/>
+														<span id="mobileNumber-field" class="invalid-feedback" role="alert"> </span>
 													</div>
 												</div>
 												<div class="col-12">
-													<button type="submit" class="btn btn-primary mt-1 mr-1">Save changes</button>
+													<button type="submit" id="updateUserInformationButton" class="btn btn-primary mt-1 mr-1">Save changes</button>
 													<button type="reset" class="btn btn-outline-secondary mt-1">Reset</button>
 												</div>
 											</div>
@@ -547,6 +541,92 @@
                 processError(msg, obj, 'current-password', '#current-password', '#current-password-field');
                 processError(msg, obj, 'password', '#password', '#password-field');
 				processError(msg, obj, 'confirm-password', '#confirm-password', '#confirm-password-field');
+            }
+        }
+		
+		function processError(msg, obj, name_field, input, validation) {
+            if (jQuery.inArray(name_field, obj) == '-1') {
+                $(input).removeClass('is-invalid');
+                $(validation).html('');
+            } else {
+                $(input).addClass('is-invalid');
+                $(validation).html('<strong>'+msg[name_field][0]+'</strong>');
+            }
+        }
+		
+		function loadSpinner(item) {
+            $(item).attr('disabled', true);
+            $(item).html('<div><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> <span class="ml-25 align-middle">Processing...</span></div>');
+        }
+		
+		function removeSpinner(item, message) {
+            $(item).attr('disabled', false);
+            $(item).html(message);
+        }
+	</script>
+	
+	<!-- Handle Information Field Update -->
+	<script>
+		$(document).on('submit', '#updateUserInformation', function (event) {
+			loadSpinner('#updateUserInformationButton');
+			event.preventDefault();
+			const formSection = $('.form-block');
+			let data = $(this).serialize();
+			try {
+				axios.post("{{ route('user.updateInformation') }}", data)
+				.then((result) => {
+					// Form Block Section
+					formSection.block({
+						message: '<div class="spinner-border text-primary" role="status"></div><br><p class="mt-1">Updating... Please wait a moment...</p>',
+						timeout: 1000,
+						css: {
+							backgroundColor: 'transparent',
+							border: '0'
+						},
+						overlayCSS: {
+							backgroundColor: '#fff',
+							opacity: 0.8
+						}
+					});
+					// Remove Error Message
+					$('#bio').removeClass('is-invalid');
+					$('#bio-field').html('');
+					$('#account-birth-date').removeClass('is-invalid');
+					$('#account-birth-date +.flatpickr').removeClass('is-invalid');
+					$('#dob-field').html('');
+					$('#country + span.select2-container > .selection > span').removeClass('is-invalid');
+					$('#country-field').html('');
+					$('#website').removeClass('is-invalid');
+					$('#website-field').html('');
+					$('#mobileNumber').removeClass('is-invalid');
+					$('#mobileNumber-field').html('');
+					//Toastr Message
+					toastr.success(
+						'"👋 '+result.data.success+'"',
+						"Profile Info Update Successful",
+						{ showMethod: "slideDown", hideMethod: "slideUp", timeOut: 5e3, positionClass: "toast-top-right",  progressBar: !0 }
+					);
+					// set spinner to initial state
+					removeSpinner('#updateUserInformationButton', 'Save Changes')
+				}).catch((err) => {
+					console.log(err);
+					printErrorMsg(err.response.data.error)
+					removeSpinner('#updateUserInformationButton', 'Save Changes')
+				});
+			}catch(error) {
+				
+			}
+		});
+		
+		function printErrorMsg(msg) {
+            if (msg != undefined) {
+                var obj = Object.keys(msg);
+                processError(msg, obj, 'bio', '#bio', '#bio-field');
+				processError(msg, obj, 'dob', '#account-birth-date', '#dob-field');
+                processError(msg, obj, 'dob', '#account-birth-date +.flatpickr', '#dob-field');
+				processError(msg, obj, 'country', '#country + span.select2-container > .selection > span', '#country-field');
+				processError(msg, obj, 'website', '#website', '#website-field');
+				processError(msg, obj, 'mobileNumber', '#mobileNumber', '#mobileNumber-field');
             }
         }
 		

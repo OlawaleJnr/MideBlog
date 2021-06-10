@@ -62,5 +62,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany('App\Post');
     }
+	
+	// Get the Information record associated with the user table
+	public function information() 
+	{
+		return $this->hasOne('App\Information');
+	}
 }
 

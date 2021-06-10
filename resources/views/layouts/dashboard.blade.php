@@ -214,14 +214,35 @@
 				<ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
 					<li class=" nav-item">
 						<a class="d-flex align-items-center" href="{{ route('home') }}">
-							<i data-feather="home"></i>
-							<span class="menu-title text-truncate ptsans" data-i18n="Dashboard">Dashboard</span>
+							<i data-feather="menu"></i>
+							<span class="menu-title text-truncate" data-i18n="Menu">Menu</span>
+							<span class="badge badge-light-warning badge-pill ml-auto mr-1">2</span>
+						</a>
+						<ul class="menu-content">
+							<li>
+								<a class="d-flex align-items-center" href="{{ route('home') }}">
+									<i data-feather="home"></i>
+									<span class="menu-item text-truncate" data-i18n="Dashboard">Dashboard</span>
+								</a>
+							</li>
+							<li>
+								<a class="d-flex align-items-center" href="{{ url('/') }}">
+									<i data-feather="circle"></i>
+									<span class="menu-item text-truncate" data-i18n="Proceed to Blog">Proceed to Blog</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li class=" nav-item">
+						<a class="d-flex align-items-center" href="{{ route('user.account.settings') }}">
+							<i data-feather="settings"></i>
+							<span class="menu-title text-truncate ptsans" data-i18n="Account Settings">Account Settings</span>
 						</a>
 					</li>
 					<li class=" nav-item">
 						<a class="d-flex align-items-center" href="{{ route('user.account.settings') }}">
 							<i data-feather="settings"></i>
-							<span class="menu-title text-truncate ptsans" data-i18n="{{ route('user.account.settings') }}">Account Settings</span>
+							<span class="menu-title text-truncate ptsans" data-i18n="Profile">Profile</span>
 						</a>
 					</li>
 				</ul>
