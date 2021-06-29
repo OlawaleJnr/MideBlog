@@ -24,21 +24,21 @@ Auth::routes(['verify' => true]);
 
 
 // Admin Web Routes
-Route::prefix('/admin')->namespace('Admin')->name('admin.')->group(function() {
-    Route::get('/', 'Auth\LoginController@index')->name('login');
-    Route::post('/', 'Auth\LoginController@login')->name('auth.login');
-    Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+Route::prefix('/admin')->namespace('Admin')->name('admin.')->group(function () {
+  Route::get('/', 'Auth\LoginController@index')->name('login');
+  Route::post('/', 'Auth\LoginController@login')->name('auth.login');
+  Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 });
 
 
 //User Web Routes
-Route::group(['prefix' => '/user', 'middleware' => ['verified', 'auth', 'web']], function() {
-    Route::get('/dashboard', 'HomeController@index')->name('home');
-	Route::get('/account-settings', 'UserAccountsController@index')->name('user.account.settings');
-    Route::post('/account-settings/upload-avatar', 'UserAccountsController@uploadAvatar')->name('user.uploadAvatar');
-    Route::post('/account-settings/update-password', 'UserAccountsController@updatePassword')->name('user.updatePassword');
-	Route::post('/account-settings/update-information', 'UserAccountsController@updateInformation')->name('user.updateInformation');
-	Route::get('/profile', 'UserProfileController@index')->name('user.profile');
+Route::group(['prefix' => '/user', 'middleware' => ['verified', 'auth', 'web']], function () {
+  Route::get('/dashboard', 'HomeController@index')->name('home');
+  Route::get('/account-settings', 'UserAccountsController@index')->name('user.account.settings');
+  Route::post('/account-settings/upload-avatar', 'UserAccountsController@uploadAvatar')->name('user.uploadAvatar');
+  Route::post('/account-settings/update-password', 'UserAccountsController@updatePassword')->name('user.updatePassword');
+  Route::post('/account-settings/update-information', 'UserAccountsController@updateInformation')->name('user.updateInformation');
+  Route::get('/profile', 'UserProfileController@index')->name('user.profile');
 });
 
 
@@ -48,42 +48,42 @@ Route::get('/post/{post}', 'AdminPostsController@post')->name('blog.post');
 
 
 Route::group(['middleware' => ['admin', 'verified']], function () {
-    // Admin Route View
-    Route::get('/admin/dashboard', function () {
-		return view('layouts.admin');
-	})->name('admin.home');
+  // Admin Route View
+  Route::get('/admin/dashboard', function () {
+    return view('layouts.admin');
+  })->name('admin.home');
 
-    // Admin Users Resource view
-    Route::resource('/admin/users', 'AdminUsersController');
+  // Admin Users Resource view
+  Route::resource('/admin/users', 'AdminUsersController');
 
-    // Admin Users Manage View
-    Route::get('/admin/user/manage', 'AdminUsersController@manage')->name('users.manage');
+  // Admin Users Manage View
+  Route::get('/admin/user/manage', 'AdminUsersController@manage')->name('users.manage');
 
-    // Admin Post Resource view
-    Route::resource('/admin/posts', 'AdminPostsController');
+  // Admin Post Resource view
+  Route::resource('/admin/posts', 'AdminPostsController');
 
-    // Admin Posts Manage View
-    Route::get('/admin/post/manage', 'AdminPostsController@manage')->name('posts.manage');
+  // Admin Posts Manage View
+  Route::get('/admin/post/manage', 'AdminPostsController@manage')->name('posts.manage');
 
-    // Admin Categories Resource view
-    Route::resource('/admin/categories', 'AdminCategoriesController');
+  // Admin Categories Resource view
+  Route::resource('/admin/categories', 'AdminCategoriesController');
 
-    // Admin Medias Resource view
-    Route::resource('/admin/media', 'AdminMediasController');
+  // Admin Medias Resource view
+  Route::resource('/admin/media', 'AdminMediasController');
 
-    // Post Comments Resource View
-    Route::resource('/admin/comments', 'PostCommentsController');
-    Route::patch('/admin/comments/approve/{comment}', 'PostCommentsController@approve')->name('comments.approve');
-    Route::patch('/admin/comments/unapprove/{comment}', 'PostCommentsController@unapprove')->name('comments.unapprove');
+  // Post Comments Resource View
+  Route::resource('/admin/comments', 'PostCommentsController');
+  Route::patch('/admin/comments/approve/{comment}', 'PostCommentsController@approve')->name('comments.approve');
+  Route::patch('/admin/comments/unapprove/{comment}', 'PostCommentsController@unapprove')->name('comments.unapprove');
 
-    // Admin Comment Reply Resource View
-    Route::resource('/admin/comment/replies', 'CommentRepliesController');
+  // Admin Comment Reply Resource View
+  Route::resource('/admin/comment/replies', 'CommentRepliesController');
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::post('/comment/reply', 'CommentRepliesController@storeReply')->name('comment.store.replies');
+  Route::post('/comment/reply', 'CommentRepliesController@storeReply')->name('comment.store.replies');
 });
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth', 'admin', 'verified']], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
+  \UniSharp\LaravelFilemanager\Lfm::routes();
 });
