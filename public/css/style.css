@@ -30,9 +30,9 @@
     Default Styles
 ***************************************/
 /*-- Variables --*/
-@font-face{
-    src: url(../fonts/Red_Hat_Display/RedHatDisplay-Regular.ttf);
-    font-family: Red Hat Display;
+@font-face {
+    src: url(../fonts/PTSans/PTSans.ttf);
+    font-family: PTSans;
 }
 
 :root {
@@ -87,8 +87,8 @@
   --shadow-light: 0 2px 6px 0 rgba(0, 0, 0, 0.05);
   --shadow-dark: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
   --transition: 0.3s;
-  --font-primary: 'Red Hat Display', sans-serif;
-  --secondary-font: 'Red Hat Display', sans-serif;
+  --font-primary: 'PTSans', sans-serif;
+  --secondary-font: 'PTSans', sans-serif;
   --font-awesome: 'Font Awesome 5 Pro';
   --font-size-b1: 18px;
   --font-size-b2: 16px;
@@ -810,7 +810,7 @@ ul li a {
 }
 
 ul li a:hover {
-  color: var(--color-primary);
+  color: #7367F0;
 }
 
 ul ul {
@@ -13413,4 +13413,283 @@ body.active-dark-mode .axil-footer-style-1 .footer-top .inner {
     background: #242424;
     color: #ffffff;
   }
+}
+
+  
+/**=====================
+    Custom CSS Starts
+==========================**/
+.sidebar-find-author {
+	display: inline-block;
+    float: none;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.wiki-box > h4 {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.wiki-box img {
+    display: inline-block;
+    vertical-align: bottom;
+    width: 30px;
+}
+
+.helpful {
+    display: inline-block;
+    width: 100%;
+}
+
+.helpful > span {
+    font-size: 10px;
+}
+
+.add-remove-frnd {
+    display: inline-block;
+    list-style: outside none none;
+    margin: 5px 0 0;
+    padding: 0 10px;
+    text-align: center;
+    width: 100%;
+}
+
+.add-remove-frnd > li {
+    display: inline-block;
+    margin-right: 6px;
+}
+
+.add-remove-frnd > li:last-child {
+    margin-right: 0;
+}
+
+.wiki-box {
+	background: #fff none repeat scroll 0 0;
+    display: inline-block;
+    padding: 15px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 480px) {
+	.sidebar-find-author > div {
+		margin-right: 0;
+		width: 100%;
+	}
+}
+
+.wiki-box > p {
+    font-size: 12px;
+    line-height: 21px;
+	color: #959ab5;
+}
+
+.author-discovery {
+	background: #fff;
+	border: none;
+    border-radius: 3px;
+	margin-bottom: 2rem;
+    box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%);
+    -webkit-transition: all .3s ease-in-out,background 0s,color 0s,border-color 0s;
+    transition: all .3s ease-in-out,background 0s,color 0s,border-color 0s;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid transparent;
+}
+
+.nav-tabs .nav-link {
+    border: 0;
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    color: #495057;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+    border-bottom: 2px solid #7367F0;
+}
+
+.app-fixed-search {
+    padding: .35rem .5rem;
+    border-bottom: 1px solid #EBE9F1;
+    background-color: #FFF;
+    border-top-right-radius: .357rem;
+}
+
+@media (max-width: 991.98px){
+	.app-fixed-search {
+		border-top-left-radius: .357rem;
+	}
+}
+
+.app-fixed-search .input-group-text, .app-fixed-search input {
+    border: 0;
+    background-color: transparent;
+}
+
+.input-group:not(.bootstrap-touchspin):focus-within .form-control, .input-group:not(.bootstrap-touchspin):focus-within .input-group-text {
+    border-color: #7367F0;
+    box-shadow: none;
+}
+
+.app-fixed-search .dropdown-toggle::after {
+	display: none;
+}
+
+.avatar {
+    white-space: nowrap;
+    background-color: #C3C3C3;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    color: #FFF;
+    display: inline-flex;
+    font-size: 1rem;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: 600;
+}
+
+.avatar img {
+    border-radius: 50%;
+}
+
+.mr-75, .mx-75 {
+    margin-right: 1.5rem!important;
+}
+
+.profile-user-info + button {
+	width: 100px;
+	height: 30px;
+}
+
+.btn.btn-sm.btn-icon {
+    padding: .5rem;
+    line-height: .5;
+}
+
+.waves-effect {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.waves-float {
+    -webkit-mask-image: none;
+    -webkit-box-shadow: 0 1px 1.5px 1px rgb(0 0 0 / 12%);
+    box-shadow: 0 1px 1.5px 1px rgb(0 0 0 / 12%);
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+
+.author-list-left-25 {
+	margin-right: 25px;
+}
+
+.scrollbar-inner_2 {
+	height: 400px;
+}
+
+.btn-outline-primary:hover:not(.disabled):not(:disabled) {
+    background-color: rgba(115,103,240,.04);
+    color: #7367F0;
+}
+
+.btn-outline-success:hover:not(.disabled):not(:disabled) {
+    background-color: rgba(115,103,240,.04);
+    color: #7367F0;
+}
+
+.btn-outline-danger:hover:not(.disabled):not(:disabled) {
+    background-color: rgba(115,103,240,.04);
+    color: #7367F0;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled).active, .btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled):focus, .show>.btn-outline-primary.dropdown-toggle {
+    background-color: rgba(115,103,240,.2);
+    color: #7367F0;
+}
+
+.robo-image {
+    display: table;
+    height: 120px;
+    width: 100%;
+}
+
+@media screen and (max-width: 736px){
+	.robo-image {
+		height: auto;
+	}
+}
+
+.v-center {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+}
+
+svg #shadow_1_ {
+    animation-name: shadowAnimation;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+    transform-origin: 50%;
+}
+
+svg #robot_1_ {
+    animation-name: verticalAnimation;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+
+.robo-meta {
+    color: #7367F0;
+    display: table;
+    height: 120px;
+    width: 100%;
+	margin-top: 90px;
+}
+
+@media screen and (max-width: 736px){
+	.robo-meta {
+		height: auto;
+		text-align: center;
+	}
+}
+
+.wiki-box > p > span {
+    display: inline-block;
+    width: 100%;
+    color: #535165;
+    font-weight: 500;
+}
+
+.add-remove-frnd > li a {
+    border-radius: 4px;
+    color: #fff;
+    display: inline-block;
+    padding: 2px 10px;
+    transition: all 0.2s linear 0s;
+    font-size: 13px;
+}
+
+.add-tofrndlist > a {
+    background: #23d2e2 none repeat scroll 0 0;
+}
+
+.remove-frnd > a {
+    background: #a8adcd none repeat scroll 0 0;
 }

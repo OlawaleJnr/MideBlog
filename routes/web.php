@@ -14,11 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/', function () {
-    $posts = Post::all();
-    return view('index', compact('posts'));
-});
+//  Public Web Routes
+Route::get('/', 'UserController@index');
+Route::get('/find-authors', 'UserController@displayFindAuthors')->name('findAuthors')->middleware('auth');
+Route::get('/search-author', 'UserController@searchAuthor')->name('searchAuthor')->middleware('auth');
 
 // User Auth Routes
 Auth::routes(['verify' => true]);
@@ -39,6 +38,7 @@ Route::group(['prefix' => '/user', 'middleware' => ['verified', 'auth', 'web']],
     Route::post('/account-settings/upload-avatar', 'UserAccountsController@uploadAvatar')->name('user.uploadAvatar');
     Route::post('/account-settings/update-password', 'UserAccountsController@updatePassword')->name('user.updatePassword');
 	Route::post('/account-settings/update-information', 'UserAccountsController@updateInformation')->name('user.updateInformation');
+	Route::get('/profile', 'UserProfileController@index')->name('user.profile');
 });
 
 

@@ -165,7 +165,7 @@
 										<!--/ header media -->
 										
 										<!-- form -->
-										<form class="form form-vertical mt-2" autocomplete="off">
+										<form id="updateUserDetails" class="form form-block form-vertical mt-2" autocomplete="off">
 											<div class="row">
 												<div class="col-12 col-sm-6">
 													<div class="form-group">
@@ -197,7 +197,7 @@
 															  id="username"
 															  class="form-control"
 															  name="username"
-															  value="{{ Auth::guard('web')->user()->name }}"
+															  value="{{ Auth::guard('web')->user()->username }}"
 															  placeholder="MideBlog001"
 															/>
 														</div>
@@ -234,7 +234,7 @@
 															  class="form-control"
 															  name="company"
 															  placeholder="Mide Technologies"
-															  value="{{ Auth::guard('web')->user()->email }}"
+															  value="{{ Auth::guard('web')->user()->company }}"
 															/>
 														</div>
 													</div>
@@ -251,7 +251,7 @@
 												</div>
 												
 												<div class="col-12">
-													<button type="submit" class="btn btn-primary mt-2 mr-1">Save changes</button>
+													<button type="submit" id="updateUserDetailsButton" class="btn btn-primary mt-2 mr-1">Save changes</button>
 													<button type="reset" class="btn btn-outline-secondary mt-2">Reset</button>
 												</div>
 											</div>
@@ -328,7 +328,7 @@
 										aria-labelledby="account-pill-info"
 										aria-expanded="false"
 									>
-										<form id="updateUserInformation" class="form form-vertical mt-2" autocomplete="off">
+										<form id="updateUserInformation" class="form form-block form-vertical mt-2" autocomplete="off">
 											<div class="row">
 												<div class="col-12">
 													<div class="form-group">
@@ -339,7 +339,7 @@
 															name="bio"
 															rows="4"
 															placeholder="Your Bio data here..."
-														>{{ Auth::guard('web')->user()->information->bio }}</textarea>
+														>{{ Auth::guard('web')->user()->information ? Auth::guard('web')->user()->information->bio : '' }}</textarea>
 														<span id="bio-field" class="invalid-feedback" role="alert"> </span>
 													</div>
 												</div>
@@ -352,7 +352,7 @@
 															class="form-control flatpickr"
 															name="dob"
 															placeholder="YY-MM-DD"
-															value="{{ Auth::guard('web')->user()->information->dob }}"
+															value="{{ Auth::guard('web')->user()->information ? Auth::guard('web')->user()->information->dob : '' }}"
 														/>
 														<span id="dob-field" class="invalid-feedback" role="alert"> </span>
 													</div>
@@ -379,7 +379,7 @@
 															class="form-control"
 															name="website"
 															placeholder="http://mideblog.herokuapp.com"
-															value="{{ Auth::guard('web')->user()->information->website }}"
+															value="{{ Auth::guard('web')->user()->information ? Auth::guard('web')->user()->information->website : '' }}"
 														/>
 														<span id="website-field" class="invalid-feedback" role="alert"> </span>
 													</div>
@@ -393,7 +393,7 @@
 															class="form-control"
 															name="mobileNumber"
 															placeholder="(+656) 254 2568"
-															value="{{ Auth::guard('web')->user()->information->mobileNumber }}"
+															value="{{ Auth::guard('web')->user()->information ? Auth::guard('web')->user()->information->mobileNumber : '' }}"
 														/>
 														<span id="mobileNumber-field" class="invalid-feedback" role="alert"> </span>
 													</div>
@@ -490,7 +490,7 @@
 	<!-- Handle Password Field Update -->
 	<script>
 		$(document).on('submit', '#updateUserPassword', function (event) {
-			loadSpinner('#updateUserPasswordButton');
+			loadChangePasswordSpinner('#updateUserPasswordButton');
 			event.preventDefault();
 			const formSection = $('.form-block');
 			let data = $(this).serialize();
@@ -524,27 +524,27 @@
 						{ showMethod: "slideDown", hideMethod: "slideUp", timeOut: 5e3, positionClass: "toast-top-right",  progressBar: !0 }
 					);
 					// set spinner to initial state
-					removeSpinner('#updateUserPasswordButton', 'Save Changes')
+					removeChangePasswordSpinner('#updateUserPasswordButton', 'Save Changes')
 				}).catch((err) => {
 					console.log(err);
-					printErrorMsg(err.response.data.error)
-					removeSpinner('#updateUserPasswordButton', 'Save Changes')
+					printChangePasswordErrorMsg(err.response.data.error)
+					removeChangePasswordSpinner('#updateUserPasswordButton', 'Save Changes')
 				});
 			}catch(error) {
 				
 			}
 		});
 		
-		function printErrorMsg(msg) {
+		function printChangePasswordErrorMsg(msg) {
             if (msg != undefined) {
                 var obj = Object.keys(msg);
-                processError(msg, obj, 'current-password', '#current-password', '#current-password-field');
-                processError(msg, obj, 'password', '#password', '#password-field');
-				processError(msg, obj, 'confirm-password', '#confirm-password', '#confirm-password-field');
+                processChangePasswordError(msg, obj, 'current-password', '#current-password', '#current-password-field');
+                processChangePasswordError(msg, obj, 'password', '#password', '#password-field');
+				processChangePasswordError(msg, obj, 'confirm-password', '#confirm-password', '#confirm-password-field');
             }
         }
 		
-		function processError(msg, obj, name_field, input, validation) {
+		function processChangePasswordError(msg, obj, name_field, input, validation) {
             if (jQuery.inArray(name_field, obj) == '-1') {
                 $(input).removeClass('is-invalid');
                 $(validation).html('');
@@ -554,12 +554,12 @@
             }
         }
 		
-		function loadSpinner(item) {
+		function loadChangePasswordSpinner(item) {
             $(item).attr('disabled', true);
             $(item).html('<div><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> <span class="ml-25 align-middle">Processing...</span></div>');
         }
 		
-		function removeSpinner(item, message) {
+		function removeChangePasswordSpinner(item, message) {
             $(item).attr('disabled', false);
             $(item).html(message);
         }
@@ -568,7 +568,7 @@
 	<!-- Handle Information Field Update -->
 	<script>
 		$(document).on('submit', '#updateUserInformation', function (event) {
-			loadSpinner('#updateUserInformationButton');
+			loadChangeInformationSpinner('#updateUserInformationButton');
 			event.preventDefault();
 			const formSection = $('.form-block');
 			let data = $(this).serialize();
@@ -607,30 +607,30 @@
 						{ showMethod: "slideDown", hideMethod: "slideUp", timeOut: 5e3, positionClass: "toast-top-right",  progressBar: !0 }
 					);
 					// set spinner to initial state
-					removeSpinner('#updateUserInformationButton', 'Save Changes')
+					removeChangeInformationSpinner('#updateUserInformationButton', 'Save Changes')
 				}).catch((err) => {
 					console.log(err);
-					printErrorMsg(err.response.data.error)
-					removeSpinner('#updateUserInformationButton', 'Save Changes')
+					printChangeInformationErrorMsg(err.response.data.error)
+					removeChangeInformationSpinner('#updateUserInformationButton', 'Save Changes')
 				});
 			}catch(error) {
 				
 			}
 		});
 		
-		function printErrorMsg(msg) {
+		function printChangeInformationErrorMsg(msg) {
             if (msg != undefined) {
                 var obj = Object.keys(msg);
-                processError(msg, obj, 'bio', '#bio', '#bio-field');
-				processError(msg, obj, 'dob', '#account-birth-date', '#dob-field');
-                processError(msg, obj, 'dob', '#account-birth-date +.flatpickr', '#dob-field');
-				processError(msg, obj, 'country', '#country + span.select2-container > .selection > span', '#country-field');
-				processError(msg, obj, 'website', '#website', '#website-field');
-				processError(msg, obj, 'mobileNumber', '#mobileNumber', '#mobileNumber-field');
+                processChangeInformationError(msg, obj, 'bio', '#bio', '#bio-field');
+				processChangeInformationError(msg, obj, 'dob', '#account-birth-date', '#dob-field');
+                processChangeInformationError(msg, obj, 'dob', '#account-birth-date +.flatpickr', '#dob-field');
+				processChangeInformationError(msg, obj, 'country', '#country + span.select2-container > .selection > span', '#country-field');
+				processChangeInformationError(msg, obj, 'website', '#website', '#website-field');
+				processChangeInformationError(msg, obj, 'mobileNumber', '#mobileNumber', '#mobileNumber-field');
             }
         }
 		
-		function processError(msg, obj, name_field, input, validation) {
+		function processChangeInformationError(msg, obj, name_field, input, validation) {
             if (jQuery.inArray(name_field, obj) == '-1') {
                 $(input).removeClass('is-invalid');
                 $(validation).html('');
@@ -640,12 +640,12 @@
             }
         }
 		
-		function loadSpinner(item) {
+		function loadChangeInformationSpinner(item) {
             $(item).attr('disabled', true);
             $(item).html('<div><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> <span class="ml-25 align-middle">Processing...</span></div>');
         }
 		
-		function removeSpinner(item, message) {
+		function removeChangeInformationSpinner(item, message) {
             $(item).attr('disabled', false);
             $(item).html(message);
         }

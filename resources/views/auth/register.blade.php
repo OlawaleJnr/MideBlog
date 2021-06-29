@@ -33,6 +33,17 @@
 										@enderror
 									</div>
 									
+									{{-- Username --}}
+									<div class="form-group">
+										<input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autofocus placeholder="Mide Coder" style="font-family:PTSans;">
+										<label for="username" style="font-family:PTSans;">Username</label>	
+										@error('username')
+											<span class="invalid-feedback" role="alert">
+												<strong>{{ $message }}</strong>
+											</span>
+										@enderror
+									</div>
+									
 									{{-- Email Address --}}
 									<div class="form-group">
 										<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="user@mideblog.com" required autofocus style="font-family:PTSans;">

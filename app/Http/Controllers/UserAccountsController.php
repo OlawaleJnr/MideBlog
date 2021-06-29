@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use App\Notification;
 
 class UserAccountsController extends Controller
 {
@@ -19,7 +20,9 @@ class UserAccountsController extends Controller
      */
     public function index()
     {
-        return view('user.account.index');
+		// Get all the notification associated to a user
+        $notification = Notification::where('user_id', Auth::guard('web')->user()->id)->get();
+        return view('user.account.index', compact('notification'));
     }
 
     /**

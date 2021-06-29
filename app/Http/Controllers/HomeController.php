@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Notification;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+		// Get all the notification associated to a user
+        $notification = Notification::where('user_id', Auth::guard('web')->user()->id)->get();
+        return view('dashboard', compact('notification'));
     }
 }

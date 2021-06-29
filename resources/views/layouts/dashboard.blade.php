@@ -91,7 +91,7 @@
 					<!-- BEGIN: Notification Features -->
 					<li class="nav-item dropdown dropdown-notification mr-25">
 						<a class="nav-link" href="javascript:void(0);" data-toggle="dropdown">
-							<i class="ficon" data-feather="bell"></i><span class="badge badge-pill badge-danger badge-up">5</span>
+							<i class="ficon" data-feather="bell"></i><span class="badge badge-pill badge-danger badge-up">{{ $notification->count() }}</span>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
 							<li class="dropdown-menu-header">
@@ -123,10 +123,11 @@
 							<div class="user-nav d-sm-flex d-none">
 								<span class="user-name font-weight-bolder ptsans">{{ Auth::guard('web')->user()->name }}</span>
 								<span class="user-status ptsans">
-									@if(Auth::guard('web')->user()->is_permission == 0) 
+									@if(checkUserPermission(['user']))
 										User
-									@elseif(Auth::guard('web')->user()->is_permission == 1)
-										Publisher
+									@endif									
+									@if(checkUserPermission(['author']))
+										Author
 									@endif
 								</span>
 							</div>
@@ -136,7 +137,7 @@
 							</span>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user">
-							<a class="dropdown-item" href="page-profile.html">
+							<a class="dropdown-item" href="{{ route('user.profile') }}">
 								<i class="mr-50" data-feather="user"></i> Profile
 							</a>
 							<a class="dropdown-item" href="app-email.html">
@@ -240,7 +241,7 @@
 						</a>
 					</li>
 					<li class=" nav-item">
-						<a class="d-flex align-items-center" href="{{ route('user.account.settings') }}">
+						<a class="d-flex align-items-center" href="{{ route('user.profile') }}">
 							<i data-feather="settings"></i>
 							<span class="menu-title text-truncate ptsans" data-i18n="Profile">Profile</span>
 						</a>

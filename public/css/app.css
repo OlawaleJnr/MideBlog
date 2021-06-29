@@ -2664,8 +2664,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #3490dc;
-  border-color: #3490dc;
+  border-color: #7367F0!important;
+  background-color: #7367F0!important;
 }
 
 .btn-primary:hover {
@@ -2991,14 +2991,14 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-primary {
-  color: #3490dc;
-  border-color: #3490dc;
+  color: #7367F0!important;
+  border: 1px solid #7367F0;
 }
 
 .btn-outline-primary:hover {
   color: #fff;
-  background-color: #3490dc;
-  border-color: #3490dc;
+  border-color: #7367F0;
+  background-color: #7367F0;
 }
 
 .btn-outline-primary:focus,
@@ -3008,7 +3008,7 @@ fieldset:disabled a.btn {
 
 .btn-outline-primary.disabled,
 .btn-outline-primary:disabled {
-  color: #3490dc;
+  color: #7367F0!important;
   background-color: transparent;
 }
 
@@ -3016,8 +3016,8 @@ fieldset:disabled a.btn {
 .btn-outline-primary:not(:disabled):not(.disabled).active,
 .show > .btn-outline-primary.dropdown-toggle {
   color: #fff;
-  background-color: #3490dc;
-  border-color: #3490dc;
+  background-color: #7367F0;
+  border-color: #7367F0;
 }
 
 .btn-outline-primary:not(:disabled):not(.disabled):active:focus,
@@ -3311,9 +3311,9 @@ fieldset:disabled a.btn {
 .btn-sm,
 .btn-group-sm > .btn {
   padding: 0.25rem 0.5rem;
-  font-size: 0.7875rem;
+  font-size: .9rem;
   line-height: 1.5;
-  border-radius: 0.2rem;
+  border-radius: .358rem;
 }
 
 .btn-block {
@@ -3570,7 +3570,7 @@ input[type=button].btn-block {
 .dropdown-item {
   display: block;
   width: 100%;
-  padding: 0.25rem 1.5rem;
+  padding: 0.65rem 1.28rem;
   clear: both;
   font-weight: 400;
   color: #212529;
