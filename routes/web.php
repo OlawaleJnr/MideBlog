@@ -16,8 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 //  Public Web Routes
 Route::get('/', 'UserController@index');
-Route::get('/find-authors', 'UserController@displayFindAuthors')->name('findAuthors')->middleware('auth');
-Route::get('/search-author', 'UserController@searchAuthor')->name('searchAuthor')->middleware('auth');
+Route::get('/find-friend', 'UserController@displayFindFriend')->name('findFriend')->middleware('auth');
+Route::get('/search-friend', 'UserController@searchFriend')->name('searchFriend')->middleware('auth');
+Route::get('/processFollowshipAction', 'UserController@processFollowshipAction')->name('processFollowshipAction')->middleware('auth');
 
 // User Auth Routes
 Auth::routes(['verify' => true]);

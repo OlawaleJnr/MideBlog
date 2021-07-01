@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('title')
-	<title>Mide's Blog | Find Authors</title>
+	<title>Mide's Blog | Home</title>
 @endsection
 
 @section('content')

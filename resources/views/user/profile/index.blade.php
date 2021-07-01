@@ -107,7 +107,7 @@
 													<p class="card-text mb-0">
 														@if(checkUserPermission(['user']))
 															User
-														@endif									
+														@endif
 														@if(checkUserPermission(['author']))
 															Author
 														@endif
@@ -133,7 +133,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<!-- Plan Card starts-->
 						<div class="col-xl-3 col-lg-4 col-md-5">
 							<div class="card plan-card border-primary">
@@ -147,7 +147,7 @@
 									<div class="badge badge-light-primary">
 										@if(checkUserPermission(['user']))
 											User
-										@endif									
+										@endif
 										@if(checkUserPermission(['author']))
 											Author
 										@endif
@@ -170,7 +170,7 @@
 					</div>
 				</section>
 			</div>
-			
+
 			<!-- Tabs with Icon starts -->
 			<div class="row">
 				<div class="col-xl-12 col-lg-12">
@@ -198,9 +198,9 @@
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane active" id="activityIcon" aria-labelledby="activityIcon-tab" role="tabpanel">
-								
+
 								</div>
-								
+
 								<div class="tab-pane" id="followersIcon" aria-labelledby="followersIcon-tab" role="tabpanel">
 									<div class="scrollbar-inner">
 										<div class="scrollbar-inner_2">
@@ -216,16 +216,16 @@
 													</div>
 												@endforeach
 											@else
-												
+
 											@endif
 
 											<div class="load_more_section text-center">
-                                                <button><i data-feather="refresh-cw"></i><span class="ml-1">Load more</span></button>
-                                            </div>
+                        <button><i data-feather="refresh-cw"></i><span class="ml-1">Load more</span></button>
+                      </div>
 										</div>
 									</div>
 								</div>
-								
+
 								<div class="tab-pane" id="followingIcon" aria-labelledby="followingIcon-tab" role="tabpanel">
 									@if($following->count() > 0)
 										@foreach($following as $followin)
@@ -238,9 +238,9 @@
 											</div>
 										@endforeach
 									@else
-										
+
 									@endif
-									
+
 									<div class="load_more_section text-center">
 										<button><i data-feather="refresh-cw"></i><span class="ml-1">Load more</span></button>
 									</div>
@@ -250,8 +250,8 @@
 					</div>
 				</div>
 			</div>
-			
-			<!-- User Timeline & Permissions Starts 
+
+			<!-- User Timeline & Permissions Starts
             <div class="row">
 				<div class="col-md-12">
 					<div class="card">
@@ -273,11 +273,11 @@
 								<tbody>
 									<tr>
 										<td>Author</td>
-										
+
 									</tr>
 									<tr>
 										<td>User</td>
-										
+
 									</tr>
 								</tbody>
 							</table>
@@ -353,18 +353,18 @@
 				);
 			}
 		});
-		
+
 		function loadSpinner(item) {
             $(item).attr('disabled', true);
             $(item).html('<div><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> <span class="ml-25 align-middle">Processing...</span></div>');
         }
-		
+
 		function removeSpinner(item, message) {
             $(item).attr('disabled', false);
             $(item).html(message);
         }
 	</script>
-	
+
 	<!-- Handle Password Field Update -->
 	<script>
 		$(document).on('submit', '#updateUserPassword', function (event) {
@@ -409,10 +409,10 @@
 					removeSpinner('#updateUserPasswordButton', 'Save Changes')
 				});
 			}catch(error) {
-				
+
 			}
 		});
-		
+
 		function printErrorMsg(msg) {
             if (msg != undefined) {
                 var obj = Object.keys(msg);
@@ -421,7 +421,7 @@
 				processError(msg, obj, 'confirm-password', '#confirm-password', '#confirm-password-field');
             }
         }
-		
+
 		function processError(msg, obj, name_field, input, validation) {
             if (jQuery.inArray(name_field, obj) == '-1') {
                 $(input).removeClass('is-invalid');
@@ -431,18 +431,18 @@
                 $(validation).html('<strong>'+msg[name_field][0]+'</strong>');
             }
         }
-		
+
 		function loadSpinner(item) {
             $(item).attr('disabled', true);
             $(item).html('<div><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> <span class="ml-25 align-middle">Processing...</span></div>');
         }
-		
+
 		function removeSpinner(item, message) {
             $(item).attr('disabled', false);
             $(item).html(message);
         }
 	</script>
-	
+
 	<!-- Handle Information Field Update -->
 	<script>
 		$(document).on('submit', '#updateUserInformation', function (event) {
@@ -492,10 +492,10 @@
 					removeSpinner('#updateUserInformationButton', 'Save Changes')
 				});
 			}catch(error) {
-				
+
 			}
 		});
-		
+
 		function printErrorMsg(msg) {
             if (msg != undefined) {
                 var obj = Object.keys(msg);
@@ -507,7 +507,7 @@
 				processError(msg, obj, 'mobileNumber', '#mobileNumber', '#mobileNumber-field');
             }
         }
-		
+
 		function processError(msg, obj, name_field, input, validation) {
             if (jQuery.inArray(name_field, obj) == '-1') {
                 $(input).removeClass('is-invalid');
@@ -517,12 +517,12 @@
                 $(validation).html('<strong>'+msg[name_field][0]+'</strong>');
             }
         }
-		
+
 		function loadSpinner(item) {
             $(item).attr('disabled', true);
             $(item).html('<div><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> <span class="ml-25 align-middle">Processing...</span></div>');
         }
-		
+
 		function removeSpinner(item, message) {
             $(item).attr('disabled', false);
             $(item).html(message);

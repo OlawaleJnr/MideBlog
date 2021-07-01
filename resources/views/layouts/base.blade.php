@@ -24,7 +24,7 @@
         <div class="main-wrapper">
 			<div class="mouse-cursor cursor-outer"></div>
 			<div class="mouse-cursor cursor-inner"></div>
-		
+
             {{-- Switch Mode --}}
             <div id="my_switcher" class="my_switcher">
                 <ul>
@@ -237,18 +237,18 @@
                                                     </li>
                                                 </ul>
                                             </li>
-											@if(Auth::guard('web')->check())												
-												{{-- User Dashboard and Logout Route --}}
-												<li><a href="{{ route('findAuthors') }}">Find Authors</a></li>
-												<li><a href="{{ route('home') }}">Dashboard</a></li>												
-											@elseif(Auth::guard('admin')->check())
-												{{-- Admin Dashboard and Admin Logout Route --}}
-												<li><a href="{{ route('admin.home') }}">Dashboard</a></li>
-											@else
-												{{-- Login and Register Route --}}
-												<li><a href="{{ route('register') }}">Register</a></li>
-												<li><a href="{{ route('login') }}">Login</a></li>
-											@endif
+                                            @if(Auth::guard('web')->check())
+                                              {{-- User Dashboard and Logout Route --}}
+                                              <li><a href="{{ route('findFriend') }}">Find Friend</a></li>
+                                              <li><a href="{{ route('home') }}">Dashboard</a></li>
+                                            @elseif(Auth::guard('admin')->check())
+                                              {{-- Admin Dashboard and Admin Logout Route --}}
+                                              <li><a href="{{ route('admin.home') }}">Dashboard</a></li>
+                                            @else
+                                              {{-- Login and Register Route --}}
+                                              <li><a href="{{ route('register') }}">Register</a></li>
+                                              <li><a href="{{ route('login') }}">Login</a></li>
+                                            @endif
                                         </ul>
                                         <!-- End Mainmanu Nav -->
                                     </nav>
@@ -263,10 +263,10 @@
                                             <input type="text" class="form-control" placeholder="Search">
                                         </div>
                                     </form>
-									
+
 									{{-- Updated user/admin navigation link --}}
 									<ul class="metabar-block">
-										@if(Auth::guard('web')->check())	
+										@if(Auth::guard('web')->check())
 											{{-- User Widget--}}
 											<li class="icon"><a href="javascript:void(0)"><i class="fal fa-bookmark"></i></a></li>
 											<li class="icon"><a href="javascript:void(0)"><i class="fal fa-bell"></i></a></li>
@@ -289,7 +289,7 @@
 											</li>
 											<li><a href="javascript:void(0)"><img src="{{ Auth::guard('admin')->user()->name ? Auth::guard('admin')->user()->name : '' }}" alt="{{  Auth::guard('admin')->user()->name ? Auth::guard('admin')->user()->name . ' ' . 'Avatar' : "" }}"></a></li>
 										@else
-											
+
 										@endif
 									</ul>
                                     <!-- Start Hamburger Menu  -->
@@ -331,19 +331,18 @@
                             </ul>
                         </li>
                         <li><a href="javascript:void(0)">Mega Menu</a></li>
-						
-						@if(Auth::guard('web')->check())	
-							{{-- User Mobile Menu Navbar--}}
-							<li><a href="{{ route('findAuthors') }}">Find Authors</a></li>
-							<li><a href="{{ route('home') }}">Dashboard</a></li>
-						@elseif(Auth::guard('admin')->check())
-							{{-- Admin Mobile Menu Navbar --}}
-							<li><a href="{{ route('admin.home') }}">Dashboard</a></li>
-						@else
-							{{-- Login and Register Route --}}
-							<li><a href="{{ route('register') }}">Register</a></li>
-							<li><a href="{{ route('login') }}">Login</a></li>
-						@endif
+                        @if(Auth::guard('web')->check())
+                          {{-- User Mobile Menu Navbar--}}
+                          <li><a href="{{ route('findFriend') }}">Find Friend</a></li>
+                          <li><a href="{{ route('home') }}">Dashboard</a></li>
+                        @elseif(Auth::guard('admin')->check())
+                          {{-- Admin Mobile Menu Navbar --}}
+                          <li><a href="{{ route('admin.home') }}">Dashboard</a></li>
+                        @else
+                          {{-- Login and Register Route --}}
+                          <li><a href="{{ route('register') }}">Register</a></li>
+                          <li><a href="{{ route('login') }}">Login</a></li>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -442,7 +441,7 @@
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/vendor/slick.min.js') }}"></script>
         <script src="{{ asset('js/vendor/tweenmax.min.js') }}"></script>
-        <script src="{{ asset('js/vendor/js.cookie.js') }}"</script>
+        <script src="{{ asset('js/vendor/js.cookie.js') }}"></script>
         <script src="{{ asset('js/vendor/jquery.style.switcher.js') }}"></script>
         <script src="{{ asset('js/main.js') }}"></script>
         <script src="{{ asset('js/axios.min.js') }}"></script>
@@ -467,7 +466,7 @@
         </script>
 		@yield('scripts')
 		<script>
-			//Logout Admin
+			// Logout Admin
 			// Load progress bar
 			loadProgressBar();
 			$(document).on('submit', '#admin-logout-form', function (event) {

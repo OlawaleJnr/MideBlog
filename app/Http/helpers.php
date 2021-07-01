@@ -1,8 +1,8 @@
 <?php
-	function checkUserPermission($permission) 
+	function checkUserPermission($permission)
 	{
-		$userAccess = getUserPermission(Auth::guard('web')->user()->is_permission);
-		foreach($permission as $key => $value) 
+		$userAccess = getUserPermission(auth('web')->user()->is_permission);
+		foreach($permission as $key => $value)
 		{
 			if($value == $userAccess)
 			{
@@ -11,8 +11,8 @@
 		}
 		return false;
 	}
-	
-	function getUserPermission($id) 
+
+	function getUserPermission($id)
 	{
 		switch($id) {
 			case 1:
@@ -23,8 +23,8 @@
 				break;
 		}
 	}
-	
-	function isFollowing($id) 
+
+	function isFollowing($id)
 	{
 		// My Followers
 		if(\App\Followship::where('user1_id', $id)->where('user2_id', auth('web')->user()->id)->exists()){

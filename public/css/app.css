@@ -2991,8 +2991,9 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-primary {
-  color: #7367F0!important;
-  border: 1px solid #7367F0;
+  color: #7367F0;
+  border-color: #7367F0;
+  background-color: transparent;
 }
 
 .btn-outline-primary:hover {
@@ -3065,6 +3066,7 @@ fieldset:disabled a.btn {
 .btn-outline-success {
   color: #38c172;
   border-color: #38c172;
+  background-color: transparent;
 }
 
 .btn-outline-success:hover {
@@ -3173,6 +3175,7 @@ fieldset:disabled a.btn {
 .btn-outline-danger {
   color: #e3342f;
   border-color: #e3342f;
+  background-color: transparent;
 }
 
 .btn-outline-danger:hover {

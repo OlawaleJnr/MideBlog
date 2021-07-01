@@ -6,24 +6,27 @@
 			</div>
 			<div class="profile-user-info">
 				<h6 class="mb-0">{{ $user->name }}</h6>
-				<small class="text-muted">6 Mutual Friends</small>
+				<small class="text-muted">
+          @if(checkUserPermission(['user']))
+            User
+          @elseif (checkUserPermission(['author']))
+            Author
+          @endif
+        </small>
 			</div>
 			@if(isFollowing($user->id) == "Following")
-				<button type="button" class="btn btn-outline-primary ml-auto waves-effect waves-float waves-light">
-					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather mr-2 feather-user-plus"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
-					<span>Following</span>
-				</button>
-			@elseif(isFollowing($user->id) == "Followers")
-				<button type="button" class="btn btn-outline-success ml-auto waves-effect waves-float waves-light">
-					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather mr-2 feather-user-plus"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
-					<span>Follower</span>
-				</button>
-			@else
-				<button type="button" class="btn btn-outline-danger ml-auto waves-effect waves-float waves-light">
-					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather mr-2 feather-user-plus"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
-					<span>Follow</span>
-				</button>
-			@endif
+        <button type="button" class="btn  btn-pill btn-outline-dark ml-auto waves-effect waves-float waves-light" style="padding-top: 9px; padding-bottom: 9px" onclick="processAction('{{ $user->id }}', 'unfollow', '{{ $user->id }}', '{{ $user->username }}')">
+          <span style="font-family: Arial, Helvetica, sans-serif; font-size:12px;">Following</span>
+        </button>
+        @elseif(isFollowing($user->id) == "Followers")
+        <button type="button" class="btn  btn-pill btn-outline-dark ml-auto waves-effect waves-float waves-light" style="padding-top: 9px; padding-bottom: 9px" onclick="processAction('{{ $user->id }}', 'remove', '{{ $user->id }}', '{{ $user->username }}')">
+          <span style="font-family: Arial, Helvetica, sans-serif; font-size:12px;">Remove</span>
+        </button>
+        @else
+          <button type="button" class="btn btn-pill btn-outline-primary ml-auto waves-effect waves-float waves-light" style="padding-top: 9px; padding-bottom: 9px"  onclick="processAction('{{ $user->id }}', 'follow', '{{ $user->id }}', '{{ $user->username }}')">
+            <span style="font-family: Arial, Helvetica, sans-serif; font-size:12px;">Follow</span>
+          </button>
+      @endif
 		</div>
 	@endforeach
 @else
@@ -32,7 +35,7 @@
 			<div class="col-lg-6 col-md-6 col-sm-5">
 				<div class="robo-image">
 					<div class="v-center">
-						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="../../../external.html?link=http://www.w3.org/1999/xlink" x="0px" y="0px" width="206.5px" viewBox="0 0 326.5 592" style="enable-background:new 0 0 326.5 592; margin-top:40px; margin-left:30px; height:250px;" xml:space="preserve">
+						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="../../../external.html?link=http://www.w3.org/1999/xlink" x="0px" y="0px" width="206.5px" viewBox="0 0 326.5 592" style="enable-background:new 0 0 326.5 592; margin-top:40px; margin-left:50px; height:180px;" xml:space="preserve">
 							<style type="text/css">
 								.st0{fill:#7367F0;}
 							</style>
@@ -356,7 +359,7 @@
 						<h4>Oops Search Result Error</h4>
 						<span>Sorry There was no result for your search. {{ $term }}</span>
 					</div>
-				 </div> 
+				 </div>
 			</div>
 		</div>
 	</div>
