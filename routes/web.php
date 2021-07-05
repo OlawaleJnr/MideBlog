@@ -19,6 +19,8 @@ Route::get('/', 'UserController@index');
 Route::get('/find-friend', 'UserController@displayFindFriend')->name('findFriend')->middleware('auth');
 Route::get('/search-friend', 'UserController@searchFriend')->name('searchFriend')->middleware('auth');
 Route::get('/processFollowshipAction', 'UserController@processFollowshipAction')->name('processFollowshipAction')->middleware('auth');
+Route::get('/refreshNotification', 'UserController@refreshNotification')->name('refreshNotification')->middleware('auth');
+Route::get('/reloadFollowers', 'UserController@reloadFollowers')->name('reloadFollowers')->middleware('auth');
 
 // User Auth Routes
 Auth::routes(['verify' => true]);

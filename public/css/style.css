@@ -14243,7 +14243,6 @@ body.active-dark-mode .axil-footer-style-1 .footer-top .inner {
   height: 400px;
 }
 
-
 .robo-image {
   display: table;
   height: 120px;
@@ -14322,20 +14321,83 @@ svg #robot_1_ {
   border-radius: 60px;
 }
 
-.btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active, .btn-outline-primary.active {
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
+.btn-outline-primary.active {
   color: white;
   background-color: #4433ff !important;
   border-color: #4433ff !important;
 }
 
-.btn-outline-danger:hover, .btn-outline-danger:focus, .btn-outline-danger:active, .btn-outline-danger.active {
+.btn-outline-danger:hover,
+.btn-outline-danger:focus,
+.btn-outline-danger:active,
+.btn-outline-danger.active {
   color: white;
   background-color: #bd2130 !important;
   border-color: #bd2130 !important;
 }
 
-.btn-outline-success:hover, .btn-outline-success:focus, .btn-outline-success:active, .btn-outline-success.active {
+.btn-outline-success:hover,
+.btn-outline-success:focus,
+.btn-outline-success:active,
+.btn-outline-success.active {
   color: white;
   background-color: #3f901d !important;
   border-color: #3f901d !important;
+}
+
+.badge.badge-up {
+  position: absolute;
+  top: -4px;
+  right: 114px;
+  min-width: 1.429rem;
+  min-height: 1.429rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 0.786rem;
+  line-height: 0.786;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+@media (max-width: 576px) {
+  .header .header-bottom .row .col-xl-5 .metabar-block li.icon a span.badge.badge-up {
+    right: 192px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header .header-bottom .row .col-xl-5 .metabar-block li.icon a span.badge.badge-up {
+    right: 210px;
+  }
+}
+
+@media (max-width: 992px) {
+  .header .header-bottom .row .col-xl-5 .metabar-block li.icon a span.badge.badge-up {
+    right: 210px;
+  }
+}
+
+@media (max-width: 400px) {
+  .header .header-bottom .row .col-xl-5 .metabar-block li.icon a span.badge.badge-up {
+    right: 192px;
+  }
+}
+
+@media (max-width: 320px) {
+  .header .header-bottom .row .col-xl-5 .metabar-block li.icon a span.badge.badge-up {
+    right: 164px;
+  }
 }
