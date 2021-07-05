@@ -84,39 +84,5 @@ class DatabaseSeeder extends Seeder
       'password' => Hash::make('olawale123'),
     ]);
 
-    \App\Followship::create([
-      'user1_id' => $user2->id,
-      'user2_id' => 1,
-    ]);
-
-    \App\Followship::create([
-      'user1_id' => $user3->id,
-      'user2_id' => 1,
-    ]);
-
-    \App\Followship::create([
-      'user1_id' => $user4->id,
-      'user2_id' => 1,
-    ]);
-
-    \App\Followship::create([
-      'user1_id' => $user5->id,
-      'user2_id' => 1,
-    ]);
-
-    \App\Followship::create([
-      'user1_id' => $user1->id,
-      'user2_id' => $user6->id,
-    ]);
-
-    \App\Followship::create([
-      'user1_id' => $user1->id,
-      'user2_id' => $user3->id,
-    ]);
-
-    \App\Followship::create([
-      'user1_id' => $user1->id,
-      'user2_id' => $user7->id,
-    ]);
   }
 }
